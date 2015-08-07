@@ -28,5 +28,14 @@
 *.x86_64
 *.hex
 
-# Debug files
-*.dSYM/
+# 开放模式 @华兄
+SI/
+Debug/
+Exe/
+List/
+Obj/
+Listing/
+Output/
+Doc/
+
+# 保守模式 @华兄
