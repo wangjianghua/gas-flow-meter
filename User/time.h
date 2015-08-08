@@ -6,9 +6,6 @@
 #endif
 
 
-#define TIME_MINUTE_SET           1
-#define TIME_HOUR_SET             2
-
 #define MAX_TIME_VAL             99
 
 #define TIME_DEFAULT_STR_POS      0
@@ -38,7 +35,6 @@ extern const u8 g_time_count_pos[][2];
 extern const u8 g_time_count_str[];
 extern bool g_time_count_complete;
 extern const u8 g_time_default_set_pos[][2];
-extern bool g_time_setting;
 extern bool g_time_set;
 extern const u8 g_time_count_run_str[];
 extern const u8 g_time_count_pause_str[];

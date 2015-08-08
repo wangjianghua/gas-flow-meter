@@ -2,6 +2,7 @@
 
 
 KEY_PARAM g_key_param;
+bool g_param_setting;
 
 void init_key(void)
 {

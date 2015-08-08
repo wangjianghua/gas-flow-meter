@@ -5,7 +5,6 @@ TIME_PARAM g_time_count;
 TIME_PARAM g_time_default;
 bool g_time_count_complete;
 bool g_time_count_pause;
-bool g_time_setting;
 bool g_time_set;
 u32 g_app_tick;
 
@@ -49,7 +48,7 @@ void init_time(void)
     g_time_default.hour = MAX_TIME_VAL;
 
     g_time_count_complete = FALSE;
-    g_time_setting = FALSE;
+    g_param_setting = FALSE;
     g_time_set = FALSE;
     
     g_time_count_pause = TRUE;

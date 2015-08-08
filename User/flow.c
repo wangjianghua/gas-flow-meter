@@ -11,6 +11,11 @@ const u8 g_flow_pos[][2] = {
     {2, 3}
 };
 
+const u8 g_flow_set_pos[][2] = {
+    {2, 5},
+    {2, 3}
+};
+
 const u16 FS400X_READ_INSTANT_FLOW[] = {0x19d, 0xf0, 0x01, 0x08, 0xf9, 0x0d, 0x00};
 
 void init_flow(void)

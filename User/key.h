@@ -12,6 +12,11 @@
 #define KEY_MSG_PAUSE              3
 #define KEY_MSG_CLEAR              4
 
+#define TIME_MINUTE_SET            1
+#define TIME_HOUR_SET              2
+#define FLOW_DEC_SET               3
+#define FLOW_INT_SET               4
+
 #define KEY_SET_PIN       GPIO_Pin_4
 #define KEY_SET_PORT           GPIOA
 
@@ -42,6 +47,7 @@ typedef struct {
 } KEY_PARAM; 
 
 extern KEY_PARAM g_key_param;
+extern bool g_param_setting;
 
 void init_key(void);
 
