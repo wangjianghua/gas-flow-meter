@@ -27,7 +27,7 @@
 #define KEY_CLEAR_PIN     GPIO_Pin_0
 #define KEY_CLEAR_PORT         GPIOB
 
-#define DEFAULT_KEY_COUNT          2
+#define DEFAULT_KEY_COUNT          3
 
 typedef struct {
     u8 msg;

@@ -12,7 +12,7 @@
 #define BUZZER_ON()           GPIO_SetBits(BUZZER_PORT, BUZZER_PIN)
 #define BUZZER_OFF()          GPIO_ResetBits(BUZZER_PORT, BUZZER_PIN) 
 
-#define DEFAULT_BEEP_PERIOD  (5000 / (1000 / SYS_TICKS_PER_SEC))
+#define DEFAULT_BEEP_PERIOD  (2000 / (1000 / SYS_TICKS_PER_SEC))
 
 extern u32 g_beep_cnt;
 

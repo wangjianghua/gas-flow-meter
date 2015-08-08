@@ -275,7 +275,6 @@ void rtc_config(void)
     {
         /* Backup data register value is not correct or not yet programmed (when
            the first time the program is executed) */
-           
         DEBUG_WARN("\r\n\n RTC not yet configured....");
 
         /* RTC Configuration */
@@ -302,11 +301,13 @@ void rtc_config(void)
         }
 
         DEBUG_WARN("\r\n No need to configure RTC....");
+        
         /* Wait for RTC registers synchronization */
         RTC_WaitForSynchro();
 
         /* Enable the RTC Second */
         RTC_ITConfig(RTC_IT_SEC, ENABLE);
+        
         /* Wait until last write operation on RTC registers has finished */
         RTC_WaitForLastTask();
     }
@@ -545,7 +546,7 @@ void tim2_config(void)
     TIM_Cmd(TIM2, ENABLE);
 }
 
-void lcm12864_config(void)
+void lcd_config(void)
 {
     GPIO_InitTypeDef  GPIO_InitStructure;
     
@@ -575,6 +576,9 @@ void buzzer_config(void)
 
 void systick_config(void)
 {
+    /* Configures the SysTick clock source */
+    SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK);
+    
     /* Setup SysTick Timer for (1000 / SYS_TICKS_PER_SEC) msec interrupts */
     if(SysTick_Config(SystemCoreClock / 1000  * (1000 / SYS_TICKS_PER_SEC)))
     { 
@@ -616,7 +620,7 @@ void bsp_init(void)
 
     usart2_config(); //´®¿Ú
 
-    lcm12864_config(); //LCM12864
+    lcd_config(); //LCD
 
     // ---------------------------
 
@@ -624,7 +628,7 @@ void bsp_init(void)
 
     init_flow();
 
-    init_lcm12864();
+    init_lcd();
 
     init_key();
 
@@ -632,7 +636,7 @@ void bsp_init(void)
 
     // ---------------------------
 
-    lcm12864_disp_init();
+    lcd_disp_init();
 
     // ---------------------------
 }

@@ -41,7 +41,7 @@ extern _sys_event_t _sys_event;
 #define NO_SEC                    (0u  )
 #define NO_EVT                    (0u  )
 
-#define SYS_TICKS_PER_SEC         (50u )
+#define SYS_TICKS_PER_SEC         (100u)
 
 #define _disable_interrupt()       __disable_irq()
 #define _enable_interrupt()        __enable_irq()

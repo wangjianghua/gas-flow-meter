@@ -27,7 +27,7 @@
 
 #define MAX_UART_RECV_BUF_LEN       (24) //串口接收缓冲区长度
 #define UART_RX_AF_THRESHOLD      0xfa //串口接收门限
-#define UART_TRANSMIT_TIMEOUT       (40 / (1000 / SYS_TICKS_PER_SEC)) //串口发送、接收一字节的超时时间
+#define UART_TRANSMIT_TIMEOUT       (20 / (1000 / SYS_TICKS_PER_SEC)) //串口发送、接收一字节的超时时间
 #define MAX_RECV_PKT_CHECK_TIME     (1000ul * 60) //60s
 
 typedef struct {

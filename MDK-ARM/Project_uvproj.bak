@@ -7,7 +7,7 @@
 
   <Targets>
     <Target>
-      <TargetName>TestEvent</TargetName>
+      <TargetName>gas-flow-meter</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <TargetOption>
@@ -30,6 +30,7 @@
           <SLE66AMisc></SLE66AMisc>
           <SLE66LinkerMisc></SLE66LinkerMisc>
           <SFDFile>SFD\ST\STM32F1xx\STM32F103xx.sfrSVD=SFD\ST\STM32F1xx\STM32F103xx.sfr</SFDFile>
+          <bCustSvd>0</bCustSvd>
           <UseEnv>0</UseEnv>
           <BinPath></BinPath>
           <IncludePath></IncludePath>
@@ -44,10 +45,10 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\Output\</OutputDirectory>
-          <OutputName>Project</OutputName>
+          <OutputName>gas-flow-meter</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
-          <CreateHexFile>0</CreateHexFile>
+          <CreateHexFile>1</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
           <ListingPath>.\Listing\</ListingPath>
@@ -73,9 +74,9 @@
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
           </BeforeMake>
           <AfterMake>
-            <RunUserProg1>0</RunUserProg1>
+            <RunUserProg1>1</RunUserProg1>
             <RunUserProg2>0</RunUserProg2>
-            <UserProg1Name></UserProg1Name>
+            <UserProg1Name>fromelf.exe --bin -o "$L@L.bin" "#L"</UserProg1Name>
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
@@ -97,6 +98,7 @@
           <StopOnExitCode>3</StopOnExitCode>
           <CustomArgument></CustomArgument>
           <IncludeLibraryModules></IncludeLibraryModules>
+          <ComprImg>1</ComprImg>
         </CommonProperty>
         <DllOption>
           <SimDllName>SARMCM3.DLL</SimDllName>
@@ -126,6 +128,7 @@
             <RestoreFunctions>1</RestoreFunctions>
             <RestoreToolbox>1</RestoreToolbox>
             <LimitSpeedToRealTime>0</LimitSpeedToRealTime>
+            <RestoreSysVw>1</RestoreSysVw>
           </Simulator>
           <Target>
             <UseTarget>1</UseTarget>
@@ -137,9 +140,11 @@
             <RestoreFunctions>0</RestoreFunctions>
             <RestoreToolbox>1</RestoreToolbox>
             <RestoreTracepoints>1</RestoreTracepoints>
+            <RestoreSysVw>1</RestoreSysVw>
+            <UsePdscDebugDescription>1</UsePdscDebugDescription>
           </Target>
           <RunDebugAfterBuild>0</RunDebugAfterBuild>
-          <TargetSelection>7</TargetSelection>
+          <TargetSelection>6</TargetSelection>
           <SimDlls>
             <CpuDll></CpuDll>
             <CpuDllArguments></CpuDllArguments>
@@ -169,6 +174,10 @@
           <Flash2>Segger\JL2CM3.dll</Flash2>
           <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
+          <pFcarmOut></pFcarmOut>
+          <pFcarmGrp></pFcarmGrp>
+          <pFcArmRoot></pFcArmRoot>
+          <FcArmLst>0</FcArmLst>
         </Utilities>
         <TargetArmAds>
           <ArmAdsMisc>
@@ -347,11 +356,13 @@
             <wLevel>0</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
+            <uC99>0</uC99>
+            <useXO>0</useXO>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>STM32F10X_MD, USE_STDPERIPH_DRIVER</Define>
+              <Define>USE_STDPERIPH_DRIVER, STM32F10X_MD</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Bsp;..\Libraries\CMSIS;..\Libraries\STM32F10x_StdPeriph_Driver\inc;..\User</IncludePath>
+              <IncludePath>..\Bsp;..\Libraries\CMSIS\CoreSupport;..\Libraries\CMSIS\DeviceSupport;..\Libraries\STM32F10x_StdPeriph_Driver\inc;..\User</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -363,6 +374,7 @@
             <SwStkChk>0</SwStkChk>
             <NoWarn>0</NoWarn>
             <uSurpInc>0</uSurpInc>
+            <useXO>0</useXO>
             <VariousControls>
               <MiscControls></MiscControls>
               <Define></Define>
@@ -379,6 +391,7 @@
             <useFile>0</useFile>
             <TextAddressRange>0x08000000</TextAddressRange>
             <DataAddressRange>0x20000000</DataAddressRange>
+            <pXoBase></pXoBase>
             <ScatterFile></ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
@@ -395,7 +408,7 @@
             <File>
               <FileName>startup_stm32f10x_cl.s</FileName>
               <FileType>2</FileType>
-              <FilePath>..\Libraries\CMSIS\startup\startup_stm32f10x_cl.s</FilePath>
+              <FilePath>..\Libraries\CMSIS\DeviceSupport\startup\startup_stm32f10x_cl.s</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -411,6 +424,7 @@
                   <StopOnExitCode>11</StopOnExitCode>
                   <CustomArgument></CustomArgument>
                   <IncludeLibraryModules></IncludeLibraryModules>
+                  <ComprImg>1</ComprImg>
                 </CommonProperty>
                 <FileArmAds>
                   <Aads>
@@ -422,6 +436,7 @@
                     <SwStkChk>2</SwStkChk>
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
+                    <useXO>2</useXO>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -435,7 +450,7 @@
             <File>
               <FileName>startup_stm32f10x_hd.s</FileName>
               <FileType>2</FileType>
-              <FilePath>..\Libraries\CMSIS\startup\startup_stm32f10x_hd.s</FilePath>
+              <FilePath>..\Libraries\CMSIS\DeviceSupport\startup\startup_stm32f10x_hd.s</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -451,6 +466,7 @@
                   <StopOnExitCode>11</StopOnExitCode>
                   <CustomArgument></CustomArgument>
                   <IncludeLibraryModules></IncludeLibraryModules>
+                  <ComprImg>1</ComprImg>
                 </CommonProperty>
                 <FileArmAds>
                   <Aads>
@@ -462,6 +478,7 @@
                     <SwStkChk>2</SwStkChk>
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
+                    <useXO>2</useXO>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -475,7 +492,7 @@
             <File>
               <FileName>startup_stm32f10x_hd_vl.s</FileName>
               <FileType>2</FileType>
-              <FilePath>..\Libraries\CMSIS\startup\startup_stm32f10x_hd_vl.s</FilePath>
+              <FilePath>..\Libraries\CMSIS\DeviceSupport\startup\startup_stm32f10x_hd_vl.s</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -491,6 +508,7 @@
                   <StopOnExitCode>11</StopOnExitCode>
                   <CustomArgument></CustomArgument>
                   <IncludeLibraryModules></IncludeLibraryModules>
+                  <ComprImg>1</ComprImg>
                 </CommonProperty>
                 <FileArmAds>
                   <Aads>
@@ -502,6 +520,7 @@
                     <SwStkChk>2</SwStkChk>
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
+                    <useXO>2</useXO>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -515,7 +534,7 @@
             <File>
               <FileName>startup_stm32f10x_ld.s</FileName>
               <FileType>2</FileType>
-              <FilePath>..\Libraries\CMSIS\startup\startup_stm32f10x_ld.s</FilePath>
+              <FilePath>..\Libraries\CMSIS\DeviceSupport\startup\startup_stm32f10x_ld.s</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -531,6 +550,7 @@
                   <StopOnExitCode>11</StopOnExitCode>
                   <CustomArgument></CustomArgument>
                   <IncludeLibraryModules></IncludeLibraryModules>
+                  <ComprImg>1</ComprImg>
                 </CommonProperty>
                 <FileArmAds>
                   <Aads>
@@ -542,6 +562,7 @@
                     <SwStkChk>2</SwStkChk>
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
+                    <useXO>2</useXO>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -555,7 +576,7 @@
             <File>
               <FileName>startup_stm32f10x_ld_vl.s</FileName>
               <FileType>2</FileType>
-              <FilePath>..\Libraries\CMSIS\startup\startup_stm32f10x_ld_vl.s</FilePath>
+              <FilePath>..\Libraries\CMSIS\DeviceSupport\startup\startup_stm32f10x_ld_vl.s</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -571,6 +592,7 @@
                   <StopOnExitCode>11</StopOnExitCode>
                   <CustomArgument></CustomArgument>
                   <IncludeLibraryModules></IncludeLibraryModules>
+                  <ComprImg>1</ComprImg>
                 </CommonProperty>
                 <FileArmAds>
                   <Aads>
@@ -582,6 +604,7 @@
                     <SwStkChk>2</SwStkChk>
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
+                    <useXO>2</useXO>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -595,12 +618,12 @@
             <File>
               <FileName>startup_stm32f10x_md.s</FileName>
               <FileType>2</FileType>
-              <FilePath>..\Libraries\CMSIS\startup\startup_stm32f10x_md.s</FilePath>
+              <FilePath>..\Libraries\CMSIS\DeviceSupport\startup\startup_stm32f10x_md.s</FilePath>
             </File>
             <File>
               <FileName>startup_stm32f10x_md_vl.s</FileName>
               <FileType>2</FileType>
-              <FilePath>..\Libraries\CMSIS\startup\startup_stm32f10x_md_vl.s</FilePath>
+              <FilePath>..\Libraries\CMSIS\DeviceSupport\startup\startup_stm32f10x_md_vl.s</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -616,6 +639,7 @@
                   <StopOnExitCode>11</StopOnExitCode>
                   <CustomArgument></CustomArgument>
                   <IncludeLibraryModules></IncludeLibraryModules>
+                  <ComprImg>1</ComprImg>
                 </CommonProperty>
                 <FileArmAds>
                   <Aads>
@@ -627,6 +651,7 @@
                     <SwStkChk>2</SwStkChk>
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
+                    <useXO>2</useXO>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -640,7 +665,7 @@
             <File>
               <FileName>startup_stm32f10x_xl.s</FileName>
               <FileType>2</FileType>
-              <FilePath>..\Libraries\CMSIS\startup\startup_stm32f10x_xl.s</FilePath>
+              <FilePath>..\Libraries\CMSIS\DeviceSupport\startup\startup_stm32f10x_xl.s</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -656,6 +681,7 @@
                   <StopOnExitCode>11</StopOnExitCode>
                   <CustomArgument></CustomArgument>
                   <IncludeLibraryModules></IncludeLibraryModules>
+                  <ComprImg>1</ComprImg>
                 </CommonProperty>
                 <FileArmAds>
                   <Aads>
@@ -667,6 +693,7 @@
                     <SwStkChk>2</SwStkChk>
                     <NoWarn>2</NoWarn>
                     <uSurpInc>2</uSurpInc>
+                    <useXO>2</useXO>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -685,12 +712,12 @@
             <File>
               <FileName>core_cm3.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Libraries\CMSIS\core_cm3.c</FilePath>
+              <FilePath>..\Libraries\CMSIS\CoreSupport\core_cm3.c</FilePath>
             </File>
             <File>
               <FileName>system_stm32f10x.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Libraries\CMSIS\system_stm32f10x.c</FilePath>
+              <FilePath>..\Libraries\CMSIS\DeviceSupport\system_stm32f10x.c</FilePath>
             </File>
           </Files>
         </Group>

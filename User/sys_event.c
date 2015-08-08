@@ -21,7 +21,7 @@ void sys_evt_del( _sys_event_t evt )
 
 void on_tick(void)
 {
-    u8 disp_tmp_buf[MAX_LCM_DISP_TMP_BUF_LEN];
+    u8 disp_tmp_buf[MAX_LCD_DISP_TMP_BUF_LEN];
     u8 disp_buf_len;
     u8 pos;
 
@@ -52,7 +52,7 @@ void on_tick(void)
                         {
                             g_key_param.set_cnt = 0;
                             g_time_setting = FALSE;
-                            lcm12864_disp_normal();
+                            lcd_disp_normal();
                         }
                         else
                         {
@@ -60,11 +60,11 @@ void on_tick(void)
                             
                             pos = g_key_param.set_cnt - 1;
                             
-                            lcm12864_disp_string(g_time_status_pos[TIME_STATUS_RUN_POS][0], g_time_status_pos[TIME_STATUS_RUN_POS][1], (u8 *)g_time_count_null_str);
-                            lcm12864_disp_string(g_time_status_pos[TIME_STATUS_PAUSE_POS][0], g_time_status_pos[TIME_STATUS_PAUSE_POS][1], (u8 *)g_time_count_null_str);
+                            lcd_disp_string(g_time_status_pos[TIME_STATUS_RUN_POS][0], g_time_status_pos[TIME_STATUS_RUN_POS][1], (u8 *)g_time_count_null_str);
+                            lcd_disp_string(g_time_status_pos[TIME_STATUS_PAUSE_POS][0], g_time_status_pos[TIME_STATUS_PAUSE_POS][1], (u8 *)g_time_count_null_str);
                             mdelay(10);
                             
-                            lcm12864_high_light(g_time_default_set_pos[pos][0], g_time_default_set_pos[pos][1]);
+                            lcd_high_light(g_time_default_set_pos[pos][0], g_time_default_set_pos[pos][1]);
                         }
 
                         if(0 == g_key_param.set_cnt)
@@ -101,7 +101,7 @@ void on_tick(void)
                             }
                             else
                             {
-                                lcm12864_disp_string(g_time_status_pos[TIME_STATUS_PAUSE_POS][0], g_time_status_pos[TIME_STATUS_PAUSE_POS][1], (u8 *)g_time_count_pause_str);
+                                lcd_disp_string(g_time_status_pos[TIME_STATUS_PAUSE_POS][0], g_time_status_pos[TIME_STATUS_PAUSE_POS][1], (u8 *)g_time_count_pause_str);
                             }
                         }
                         else
@@ -131,8 +131,8 @@ void on_tick(void)
                         sprintf((char *)disp_tmp_buf, "%02d", g_time_default.minute);
                         disp_tmp_buf[disp_buf_len] = '\0';
                         pos = g_key_param.set_cnt - 1;
-                        lcm12864_disp_string(g_time_default_set_pos[pos][0], g_time_default_set_pos[pos][1], disp_tmp_buf);
-                        lcm12864_cursor_left();
+                        lcd_disp_string(g_time_default_set_pos[pos][0], g_time_default_set_pos[pos][1], disp_tmp_buf);
+                        lcd_cursor_left();
                         g_time_set = TRUE;
                         break;
 
@@ -146,8 +146,8 @@ void on_tick(void)
                         sprintf((char *)disp_tmp_buf, "%02d", g_time_default.hour);
                         disp_tmp_buf[disp_buf_len] = '\0';
                         pos = g_key_param.set_cnt - 1;
-                        lcm12864_disp_string(g_time_default_set_pos[pos][0], g_time_default_set_pos[pos][1], disp_tmp_buf);
-                        lcm12864_cursor_left();
+                        lcd_disp_string(g_time_default_set_pos[pos][0], g_time_default_set_pos[pos][1], disp_tmp_buf);
+                        lcd_cursor_left();
                         g_time_set = TRUE;
                         break;
 
@@ -172,8 +172,8 @@ void on_tick(void)
                         sprintf((char *)disp_tmp_buf, "%02d", g_time_default.minute);
                         disp_tmp_buf[disp_buf_len] = '\0';
                         pos = g_key_param.set_cnt - 1;
-                        lcm12864_disp_string(g_time_default_set_pos[pos][0], g_time_default_set_pos[pos][1], disp_tmp_buf);
-                        lcm12864_cursor_left();
+                        lcd_disp_string(g_time_default_set_pos[pos][0], g_time_default_set_pos[pos][1], disp_tmp_buf);
+                        lcd_cursor_left();
                         g_time_set = TRUE;
                         break;
 
@@ -187,8 +187,8 @@ void on_tick(void)
                         sprintf((char *)disp_tmp_buf, "%02d", g_time_default.hour);
                         disp_tmp_buf[disp_buf_len] = '\0';
                         pos = g_key_param.set_cnt - 1;
-                        lcm12864_disp_string(g_time_default_set_pos[pos][0], g_time_default_set_pos[pos][1], disp_tmp_buf);
-                        lcm12864_cursor_left();
+                        lcd_disp_string(g_time_default_set_pos[pos][0], g_time_default_set_pos[pos][1], disp_tmp_buf);
+                        lcd_cursor_left();
                         g_time_set = TRUE;
                         break;
 
@@ -213,7 +213,7 @@ void on_tick(void)
 
                             g_time_count_pause = FALSE;
 
-                            lcm12864_disp_string(g_time_status_pos[TIME_STATUS_PAUSE_POS][0], g_time_status_pos[TIME_STATUS_PAUSE_POS][1], (u8 *)g_time_count_null_str);    
+                            lcd_disp_string(g_time_status_pos[TIME_STATUS_PAUSE_POS][0], g_time_status_pos[TIME_STATUS_PAUSE_POS][1], (u8 *)g_time_count_null_str);    
 
                             // -----------
                             RELAY_N_ON();
@@ -226,8 +226,8 @@ void on_tick(void)
 
                             g_time_count_pause = TRUE;
 
-                            lcm12864_disp_string(g_time_status_pos[TIME_STATUS_RUN_POS][0], g_time_status_pos[TIME_STATUS_RUN_POS][1], (u8 *)g_time_count_null_str);
-                            lcm12864_disp_string(g_time_status_pos[TIME_STATUS_PAUSE_POS][0], g_time_status_pos[TIME_STATUS_PAUSE_POS][1], (u8 *)g_time_count_pause_str);
+                            lcd_disp_string(g_time_status_pos[TIME_STATUS_RUN_POS][0], g_time_status_pos[TIME_STATUS_RUN_POS][1], (u8 *)g_time_count_null_str);
+                            lcd_disp_string(g_time_status_pos[TIME_STATUS_PAUSE_POS][0], g_time_status_pos[TIME_STATUS_PAUSE_POS][1], (u8 *)g_time_count_pause_str);
 
                             // -----------
                             RELAY_N_OFF();
@@ -249,8 +249,8 @@ void on_tick(void)
                         
                         _enable_rtc();
                         
-                        lcm12864_disp_string(g_time_status_pos[TIME_STATUS_PAUSE_POS][0], g_time_status_pos[TIME_STATUS_PAUSE_POS][1], (u8 *)g_time_count_null_str);
-                        lcm12864_disp_string(g_time_status_pos[TIME_STATUS_COMPLETE_POS][0], g_time_status_pos[TIME_STATUS_COMPLETE_POS][1], (u8 *)g_time_count_null_str);
+                        lcd_disp_string(g_time_status_pos[TIME_STATUS_PAUSE_POS][0], g_time_status_pos[TIME_STATUS_PAUSE_POS][1], (u8 *)g_time_count_null_str);
+                        lcd_disp_string(g_time_status_pos[TIME_STATUS_COMPLETE_POS][0], g_time_status_pos[TIME_STATUS_COMPLETE_POS][1], (u8 *)g_time_count_null_str);
 
                         // -----------
                         RELAY_N_ON();
@@ -307,11 +307,16 @@ void on_tick(void)
         }
     }    
 
-    if(check_timeout(g_flow_param.rx.start_time, FS400X_RECV_TIMEOUT) && (FALSE == g_time_setting)) //处理FS4008数据接收超时
+    if(check_timeout(g_flow_param.rx.start_time, FS400X_RECV_TIMEOUT) && (FALSE == g_time_setting)) //处理FS400X数据接收超时
     {
-        lcm12864_disp_string(g_flow_pos[FLOW_POS][0], g_flow_pos[FLOW_POS][1], "0.0 SLPM  "/* 2 Space */);
+        lcd_disp_string(g_flow_pos[FLOW_POS][0], g_flow_pos[FLOW_POS][1], "0.0 SLPM  "/* 2 Space */);
 
         g_flow_param.rx.start_time = get_tick();
+    }
+
+    if(!(_sys_tick % FS400X_INSTANT_FLOW_READ_PERIOD))
+    {
+        fs400x_read_instant_flow();
     }
 
     // -----
@@ -321,33 +326,28 @@ void on_tick(void)
 
 void on_second(void)
 {
-    u8 disp_tmp_buf[MAX_LCM_DISP_TMP_BUF_LEN];
+    u8 disp_tmp_buf[MAX_LCD_DISP_TMP_BUF_LEN];
     u8 disp_buf_len;
 
     
     _sys_sec++;
 
-    if((!(_sys_sec % LCM_REFRESH_PERIOD)) && (FALSE == g_time_setting))
+    if((!(_sys_sec % LCD_REFRESH_PERIOD)) && (FALSE == g_time_setting))
     {
         disp_buf_len = 8;
         sprintf((char *)disp_tmp_buf, "%02d时%02d分", g_time_default.hour, g_time_default.minute);
         disp_tmp_buf[disp_buf_len] = '\0';
  
-        lcm12864_disp_string(g_time_default_pos[TIME_DEFAULT_STR_POS][0], g_time_default_pos[TIME_DEFAULT_STR_POS][1], (u8 *)g_time_default_str);
-        lcm12864_disp_string(g_time_default_pos[TIME_DEFAULT_POS][0], g_time_default_pos[TIME_DEFAULT_POS][1], disp_tmp_buf);
-        lcm12864_disp_string(g_time_count_pos[TIME_COUNT_STR_POS][0], g_time_count_pos[TIME_COUNT_STR_POS][1], (u8 *)g_time_count_str);    
-        lcm12864_disp_string(g_flow_pos[FLOW_STR_POS][0], g_flow_pos[FLOW_STR_POS][1], (u8 *)g_flow_str);
-    }
-
-    if(!(_sys_sec % FS400X_INSTANT_FLOW_READ_PERIOD))
-    {
-        fs400x_read_instant_flow();
+        lcd_disp_string(g_time_default_pos[TIME_DEFAULT_STR_POS][0], g_time_default_pos[TIME_DEFAULT_STR_POS][1], (u8 *)g_time_default_str);
+        lcd_disp_string(g_time_default_pos[TIME_DEFAULT_POS][0], g_time_default_pos[TIME_DEFAULT_POS][1], disp_tmp_buf);
+        lcd_disp_string(g_time_count_pos[TIME_COUNT_STR_POS][0], g_time_count_pos[TIME_COUNT_STR_POS][1], (u8 *)g_time_count_str);    
+        lcd_disp_string(g_flow_pos[FLOW_STR_POS][0], g_flow_pos[FLOW_STR_POS][1], (u8 *)g_flow_str);
     }
 }
 
 void on_time(void)
 {
-    u8 disp_tmp_buf[MAX_LCM_DISP_TMP_BUF_LEN];
+    u8 disp_tmp_buf[MAX_LCD_DISP_TMP_BUF_LEN];
     u8 disp_buf_len;
 
     
@@ -376,9 +376,9 @@ void on_time(void)
         {
             _disble_rtc();
             g_time_count_complete = TRUE;
-            lcm12864_disp_string(g_time_status_pos[TIME_STATUS_RUN_POS][0], g_time_status_pos[TIME_STATUS_RUN_POS][1], (u8 *)g_time_count_null_str);
-            lcm12864_disp_string(g_time_status_pos[TIME_STATUS_PAUSE_POS][0], g_time_status_pos[TIME_STATUS_PAUSE_POS][1], (u8 *)g_time_count_null_str);
-            lcm12864_disp_string(g_time_status_pos[TIME_STATUS_COMPLETE_POS][0], g_time_status_pos[TIME_STATUS_COMPLETE_POS][1], (u8 *)g_time_count_complete_str);
+            lcd_disp_string(g_time_status_pos[TIME_STATUS_RUN_POS][0], g_time_status_pos[TIME_STATUS_RUN_POS][1], (u8 *)g_time_count_null_str);
+            lcd_disp_string(g_time_status_pos[TIME_STATUS_PAUSE_POS][0], g_time_status_pos[TIME_STATUS_PAUSE_POS][1], (u8 *)g_time_count_null_str);
+            lcd_disp_string(g_time_status_pos[TIME_STATUS_COMPLETE_POS][0], g_time_status_pos[TIME_STATUS_COMPLETE_POS][1], (u8 *)g_time_count_complete_str);
 
             // -----------
             RELAY_N_OFF();
@@ -393,12 +393,12 @@ void on_time(void)
     sprintf((char *)disp_tmp_buf, "%02d:%02d:%02d", g_time_count.hour, g_time_count.minute, g_time_count.second);
     disp_tmp_buf[disp_buf_len] = '\0';
 
-    lcm12864_disp_string(g_time_count_pos[TIME_COUNT_POS][0], g_time_count_pos[TIME_COUNT_POS][1], disp_tmp_buf);
+    lcd_disp_string(g_time_count_pos[TIME_COUNT_POS][0], g_time_count_pos[TIME_COUNT_POS][1], disp_tmp_buf);
 
     if(FALSE == g_time_count_complete)
     {
-        lcm12864_disp_string(g_time_status_pos[TIME_STATUS_PAUSE_POS][0], g_time_status_pos[TIME_STATUS_PAUSE_POS][1], (u8 *)g_time_count_null_str);
-        lcm12864_disp_string(g_time_status_pos[TIME_STATUS_RUN_POS][0], g_time_status_pos[TIME_STATUS_RUN_POS][1], (u8 *)g_time_count_run_str);
+        lcd_disp_string(g_time_status_pos[TIME_STATUS_PAUSE_POS][0], g_time_status_pos[TIME_STATUS_PAUSE_POS][1], (u8 *)g_time_count_null_str);
+        lcd_disp_string(g_time_status_pos[TIME_STATUS_RUN_POS][0], g_time_status_pos[TIME_STATUS_RUN_POS][1], (u8 *)g_time_count_run_str);
     }
 }
 
@@ -443,7 +443,7 @@ void on_flow(void)
 {
     u8 i, crc;
     u8 FRH, FRM, FRL;
-    u8 disp_tmp_buf[MAX_LCM_DISP_TMP_BUF_LEN];
+    u8 disp_tmp_buf[MAX_LCD_DISP_TMP_BUF_LEN];
     u8 disp_buf_len;    
     u32 data;
 
@@ -454,7 +454,7 @@ void on_flow(void)
     }
 
     crc = FS400X_CMD;
-    for(i=(FS400X_CMD_POS + 1); i<=(FS400X_DATA_LEN + (FS400X_CMD_POS + 1)); i++)
+    for(i = (FS400X_CMD_POS + 1); i <= (FS400X_DATA_LEN + (FS400X_CMD_POS + 1)); i++)
     {
         crc ^= g_com_param.buf[i];
     }
@@ -472,37 +472,47 @@ void on_flow(void)
                 FRL = g_com_param.buf[5];
                 
                 data = FRH * 65536 + FRM * 256 + FRL;
-                p_flow_ext_param->int_part = data / 1000; //整数部分
-                p_flow_ext_param->val = data;
-                p_flow_ext_param->dec_part = p_flow_ext_param->val - (p_flow_ext_param->int_part * 1000); //小数部分
-                
-                if(p_flow_ext_param->dec_part > 99)
-                {
-                    p_flow_ext_param->dec_part = p_flow_ext_param->dec_part / 100;
-                }
-                else if(p_flow_ext_param->dec_part > 9)
-                {
-                    p_flow_ext_param->dec_part = p_flow_ext_param->dec_part / 10;
-                }
-                
-                if(FALSE == g_time_setting)
-                {
-                    disp_buf_len = 10;
 
-                    if(p_flow_ext_param->int_part < 10)
+                p_flow_ext_param->sum += data;
+                p_flow_ext_param->num++;
+
+                if(MAX_FLOW_NUM == p_flow_ext_param->num)
+                {
+                    p_flow_ext_param->val = p_flow_ext_param->sum / p_flow_ext_param->num;
+
+                    p_flow_ext_param->sum = 0;
+                    p_flow_ext_param->num = 0;
+
+                    p_flow_ext_param->int_part = p_flow_ext_param->val / 1000; //整数部分
+                    p_flow_ext_param->dec_part = p_flow_ext_param->val - (p_flow_ext_param->int_part * 1000); //小数部分
+                    
+                    if(p_flow_ext_param->dec_part > 99)
                     {
-                        sprintf((char *)disp_tmp_buf, "%d.%d SLPM  "/* 2 Space */, p_flow_ext_param->int_part, p_flow_ext_param->dec_part);
+                        p_flow_ext_param->dec_part = p_flow_ext_param->dec_part / 100;
                     }
-                    else
+                    else if(p_flow_ext_param->dec_part > 9)
                     {
-                        sprintf((char *)disp_tmp_buf, "%d.%dSLPM  "/* 2 Space */, p_flow_ext_param->int_part, p_flow_ext_param->dec_part);
+                        p_flow_ext_param->dec_part = p_flow_ext_param->dec_part / 10;
                     }
                     
-                    disp_tmp_buf[disp_buf_len] = '\0';
-                    
-                    lcm12864_disp_string(g_flow_pos[FLOW_POS][0], g_flow_pos[FLOW_POS][1], disp_tmp_buf);
+                    if(FALSE == g_time_setting)
+                    {
+                        disp_buf_len = 10;
+
+                        if(p_flow_ext_param->int_part < 10)
+                        {
+                            sprintf((char *)disp_tmp_buf, "%d.%d SLPM  "/* 2 Space */, p_flow_ext_param->int_part, p_flow_ext_param->dec_part);
+                        }
+                        else
+                        {
+                            sprintf((char *)disp_tmp_buf, "%d.%dSLPM  "/* 2 Space */, p_flow_ext_param->int_part, p_flow_ext_param->dec_part);
+                        }
+                        
+                        disp_tmp_buf[disp_buf_len] = '\0';
+                        
+                        lcd_disp_string(g_flow_pos[FLOW_POS][0], g_flow_pos[FLOW_POS][1], disp_tmp_buf);
+                    }                    
                 }
-                
                 break;
             }
 

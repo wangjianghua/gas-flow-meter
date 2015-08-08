@@ -10,7 +10,7 @@
 #include "sys_main.h"
 #include "sys_event.h"
 #include "bsp.h"
-#include "lcm12864.h"
+#include "lcd.h"
 #include "time.h"
 #include "key.h"
 #include "uart.h"
