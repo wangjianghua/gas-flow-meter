@@ -46,9 +46,11 @@ void lcd_write_cmd(u8 cmd)
 {
     LCD_CS_HIGH();
     lcd_send_byte(0xf8);
+    mdelay(1);
     lcd_send_byte(cmd & 0xf0);
+    mdelay(1);
     lcd_send_byte((cmd << 4) & 0xf0);
-    mdelay(2);
+    mdelay(1);
     LCD_CS_LOW();
 }
 
@@ -56,9 +58,11 @@ void lcd_write_data(u8 data)
 {
     LCD_CS_HIGH();
     lcd_send_byte(0xfa);
+    mdelay(1);
     lcd_send_byte(data & 0xf0);
+    mdelay(1);
     lcd_send_byte((data << 4) & 0xf0); 
-    mdelay(2);
+    mdelay(1);
     LCD_CS_LOW();
 }
 
@@ -97,8 +101,6 @@ void lcd_disp_pos(u8 x, u8 y)
     pos = row + col;
 
     lcd_write_cmd(pos);
-
-    mdelay(5);
 }
 
 void lcd_clr_scr(void)
@@ -114,6 +116,7 @@ void lcd_addr_home(void)
 void lcd_high_light(u8 x, u8 y)
 {
     lcd_disp_pos(x, y);
+    
     lcd_write_cmd(0x0f);
 }
 
@@ -167,11 +170,14 @@ void lcd_disp_init(void)
 
 void init_lcd(void)
 {
+    lcd_disp_string(g_flow_pos[FLOW_POS][0], g_flow_pos[FLOW_POS][1], "0.0 SLPM  "/* 2 Space */);
+    
     LCD_CS_LOW();
     LCD_SCLK_LOW();
     LCD_SID_LOW();
-
-    mdelay(5);
+    
+    mdelay(1);
+    
     lcd_clr_scr();
     lcd_addr_home();
     lcd_disp_normal();
