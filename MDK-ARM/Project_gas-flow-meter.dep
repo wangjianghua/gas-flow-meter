@@ -1021,7 +1021,7 @@ I (..\User\flow.h)(0x55CF082A)
 I (..\User\relay.h)(0x51E61883)
 I (..\User\beep.h)(0x55C588C1)
 I (..\User\memory.h)(0x55CF1850)
-F (..\User\sys_event.c)(0x55CF1C44)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\Bsp -I..\Libraries\CMSIS\CoreSupport -I..\Libraries\CMSIS\DeviceSupport -I..\Libraries\STM32F10x_StdPeriph_Driver\inc -I..\User-I "D:\Program Files\Keil\ARM\RV31\INC"-I "D:\Program Files\Keil\ARM\CMSIS\Include"-I "D:\Program Files\Keil\ARM\Inc\ST\STM32F10x"-DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\output\sys_event.o --omf_browse .\output\sys_event.crf --depend .\output\sys_event.d)
+F (..\User\sys_event.c)(0x55CF37AF)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\Bsp -I..\Libraries\CMSIS\CoreSupport -I..\Libraries\CMSIS\DeviceSupport -I..\Libraries\STM32F10x_StdPeriph_Driver\inc -I..\User-I "D:\Program Files\Keil\ARM\RV31\INC"-I "D:\Program Files\Keil\ARM\CMSIS\Include"-I "D:\Program Files\Keil\ARM\Inc\ST\STM32F10x"-DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\output\sys_event.o --omf_browse .\output\sys_event.crf --depend .\output\sys_event.d)
 I (..\User\includes.h)(0x55CC0CB1)
 I (D:\Program Files\Keil\ARM\ARMCC\include\stdio.h)(0x51C7C554)
 I (D:\Program Files\Keil\ARM\ARMCC\include\string.h)(0x51C7C554)

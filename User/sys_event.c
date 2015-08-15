@@ -186,28 +186,47 @@ void on_tick(void)
                                 
                                 p_flow_ext_param->cal_val = p_flow_ext_param->cal_int_part * 1000 + p_flow_ext_param->cal_dec_part * 10;
 
-                                g_mem_param.cal_val = abs((int)p_flow_ext_param->avg_val - (int)p_flow_ext_param->cal_val);
+                                if((0 != p_flow_ext_param->cal_val) && (49990 != p_flow_ext_param->cal_val))
+                                {
+                                    g_mem_param.cal_val = abs((int)p_flow_ext_param->avg_val - (int)p_flow_ext_param->cal_val);
 
-                                if((0 != p_flow_ext_param->cal_val) && (p_flow_ext_param->cal_val > p_flow_ext_param->avg_val))
-                                {
-                                    g_mem_param.sign = POSITIVE_SIGN;
+                                    if(p_flow_ext_param->cal_val > p_flow_ext_param->avg_val)
+                                    {
+                                        g_mem_param.sign = POSITIVE_SIGN;
+                                    }
+                                    else
+                                    {
+                                        g_mem_param.sign = NEGATIVE_SIGN;
+                                    }
+                                    
+                                    if(g_mem_param.cal_val < (1000 * 10))
+                                    {
+                                        mem_param_write();
+                                    }
+                                    else
+                                    {
+                                        mem_param_read();
+                                    }
                                 }
-                                else if(0 != p_flow_ext_param->cal_val)
-                                {
-                                    g_mem_param.sign = NEGATIVE_SIGN;
-                                }
-                                else
+                                else if(49990 == p_flow_ext_param->cal_val) //重置校准
                                 {
                                     g_mem_param.sign = NONE_SIGN;
-                                    p_flow_ext_param->cal_val = 0;
-                                }
-                                
-                                if(g_mem_param.cal_val < (1000 * 5))
-                                {
+                                    g_mem_param.cal_val = 0;
+
                                     mem_param_write();
                                 }
                             }
+                            
+                            // -------------------------------------------------------------
 
+                            disp_buf_len = 8;
+                            sprintf((char *)disp_tmp_buf, "%02d:%02d:%02d", g_time_count.hour, g_time_count.minute, g_time_count.second);
+                            disp_tmp_buf[disp_buf_len] = '\0';
+                            
+                            lcd_disp_string(g_time_count_pos[TIME_COUNT_POS][0], g_time_count_pos[TIME_COUNT_POS][1], disp_tmp_buf);
+
+                            // -------------------------------------------------------------
+                            
                             p_flow_ext_param->disp_int_part = p_flow_ext_param->disp_val / 1000; //整数部分
                             p_flow_ext_param->disp_dec_part = (p_flow_ext_param->disp_val - (p_flow_ext_param->disp_int_part * 1000)) / 100; //小数部分
                             
@@ -806,11 +825,11 @@ void on_flow(void)
                     if(p_flow_ext_param->discrete < (100000 * 3))
                     {
                         /* 校准显示 */
-                        if((p_flow_ext_param->avg_val > (1000 * 20)) && (POSITIVE_SIGN == g_mem_param.sign))
+                        if((p_flow_ext_param->avg_val > (1000 * 10)) && (POSITIVE_SIGN == g_mem_param.sign))
                         {
                             p_flow_ext_param->disp_val = p_flow_ext_param->avg_val + g_mem_param.cal_val;
                         }
-                        else if((p_flow_ext_param->avg_val > (1000 * 20)) && (NEGATIVE_SIGN == g_mem_param.sign))
+                        else if((p_flow_ext_param->avg_val > (1000 * 10)) && (NEGATIVE_SIGN == g_mem_param.sign))
                         {
                             p_flow_ext_param->disp_val = p_flow_ext_param->avg_val - g_mem_param.cal_val;
                         }
