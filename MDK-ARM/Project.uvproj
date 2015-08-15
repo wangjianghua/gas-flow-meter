@@ -904,6 +904,11 @@
               <FileType>1</FileType>
               <FilePath>..\User\uart.c</FilePath>
             </File>
+            <File>
+              <FileName>memory.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\memory.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

@@ -16,6 +16,8 @@
 #define TIME_HOUR_SET              2
 #define FLOW_DEC_SET               3
 #define FLOW_INT_SET               4
+#define CAL_DEC_SET                5
+#define CAL_INT_SET                6
 
 #define KEY_SET_PIN       GPIO_Pin_4
 #define KEY_SET_PORT           GPIOA

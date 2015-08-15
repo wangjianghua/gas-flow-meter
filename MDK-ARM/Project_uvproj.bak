@@ -855,6 +855,31 @@
           <GroupName>User</GroupName>
           <Files>
             <File>
+              <FileName>beep.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\beep.c</FilePath>
+            </File>
+            <File>
+              <FileName>flow.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\flow.c</FilePath>
+            </File>
+            <File>
+              <FileName>key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\key.c</FilePath>
+            </File>
+            <File>
+              <FileName>lcd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\lcd.c</FilePath>
+            </File>
+            <File>
+              <FileName>relay.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\relay.c</FilePath>
+            </File>
+            <File>
               <FileName>stm32f10x_it.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\stm32f10x_it.c</FilePath>
@@ -875,34 +900,9 @@
               <FilePath>..\User\time.c</FilePath>
             </File>
             <File>
-              <FileName>key.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\key.c</FilePath>
-            </File>
-            <File>
-              <FileName>flow.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\flow.c</FilePath>
-            </File>
-            <File>
-              <FileName>lcm12864.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\lcm12864.c</FilePath>
-            </File>
-            <File>
               <FileName>uart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\uart.c</FilePath>
-            </File>
-            <File>
-              <FileName>beep.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\beep.c</FilePath>
-            </File>
-            <File>
-              <FileName>relay.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\relay.c</FilePath>
             </File>
           </Files>
         </Group>

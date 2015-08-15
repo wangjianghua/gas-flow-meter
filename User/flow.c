@@ -5,13 +5,29 @@ UART_PARAM g_flow_param;
 FLOW_EXT_PARAM g_flow_ext_param;
 FLOW_EXT_PARAM *p_flow_ext_param;
 
+bool g_flow_set;
+bool g_cal_set;
+
 const u8 g_flow_str[] = "流量";
+
+const u8 g_cal_str[] = "校准";
+
 const u8 g_flow_pos[][2] = {
     {2, 0},
     {2, 3}
 };
 
+const u8 g_cal_pos[][2] = {
+    {2, 0},
+    {2, 3}
+};
+
 const u8 g_flow_set_pos[][2] = {
+    {1, 5},
+    {1, 3}
+};
+
+const u8 g_cal_set_pos[][2] = {
     {2, 5},
     {2, 3}
 };
@@ -33,6 +49,9 @@ void init_flow(void)
     p_flow_ext_param = (FLOW_EXT_PARAM *)g_flow_param.ext;
 
     memset(p_flow_ext_param, 0, sizeof(FLOW_EXT_PARAM));
+
+    g_flow_set = FALSE;
+    g_cal_set = FALSE;
 }
 
 void fs400x_read_instant_flow(void)

@@ -161,7 +161,7 @@ void lcd_disp_init(void)
     lcd_disp_string(g_flow_pos[FLOW_STR_POS][0], g_flow_pos[FLOW_STR_POS][1], (u8 *)g_flow_str);
 
     disp_buf_len = 10;
-    sprintf((char *)disp_tmp_buf, "%d.%d SLPM  "/* 2 Space */, p_flow_ext_param->int_part, p_flow_ext_param->dec_part);
+    sprintf((char *)disp_tmp_buf, "%d.%d SLPM  "/* 2 Space */, p_flow_ext_param->disp_int_part, p_flow_ext_param->disp_dec_part);
     disp_tmp_buf[disp_buf_len] = '\0';
     lcd_disp_string(g_flow_pos[FLOW_POS][0], g_flow_pos[FLOW_POS][1], disp_tmp_buf);  
 

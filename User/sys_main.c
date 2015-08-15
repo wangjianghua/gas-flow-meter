@@ -32,6 +32,7 @@ int  main(void)
 
 
     bsp_init();
+    mem_init();
 
 test_event:
     test_event_mask = 1;
