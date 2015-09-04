@@ -423,7 +423,7 @@ void GPIO_Write(GPIO_TypeDef* GPIOx, uint16_t PortVal)
 }
 
 /**
-  * @brief  Toggles the specified GPIO pins..
+  * @brief  Toggles the specified GPIO pins.
   * @param  GPIOx: where x can be (A..I) to select the GPIO peripheral.
   * @param  GPIO_Pin: Specifies the pins to be toggled.
   * @retval None

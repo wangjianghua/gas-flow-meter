@@ -36,14 +36,14 @@
 #define OS_EVENT_MULTI_EN         0u   /* Include code for OSEventPendMulti()                          */
 #define OS_EVENT_NAME_EN          0u   /* Enable names for Sem, Mutex, Mbox and Q                      */
 
-#define OS_LOWEST_PRIO           15u   /* Defines the lowest priority that can be assigned ...         */
+#define OS_LOWEST_PRIO           30u   /* Defines the lowest priority that can be assigned ...         */
                                        /* ... MUST NEVER be higher than 254!                           */
 
 #define OS_MAX_EVENTS             5u   /* Max. number of event control blocks in your application      */
 #define OS_MAX_FLAGS              0u   /* Max. number of Event Flag Groups    in your application      */
 #define OS_MAX_MEM_PART           0u   /* Max. number of memory partitions                             */
 #define OS_MAX_QS                 0u   /* Max. number of queue control blocks in your application      */
-#define OS_MAX_TASKS              9u   /* Max. number of tasks in your application, MUST be >= 2       */
+#define OS_MAX_TASKS             15u   /* Max. number of tasks in your application, MUST be >= 2       */
 
 #define OS_SCHED_LOCK_EN          1u   /* Include code for OSSchedLock() and OSSchedUnlock()           */
 
@@ -52,8 +52,8 @@
 
 
                                        /* --------------------- TASK STACK SIZE ---------------------- */
-#define OS_TASK_TMR_STK_SIZE   1024u   /* Timer      task stack size (# of OS_STK wide entries)        */
-#define OS_TASK_STAT_STK_SIZE   256u   /* Statistics task stack size (# of OS_STK wide entries)        */
+#define OS_TASK_TMR_STK_SIZE    128u   /* Timer      task stack size (# of OS_STK wide entries)        */
+#define OS_TASK_STAT_STK_SIZE   128u   /* Statistics task stack size (# of OS_STK wide entries)        */
 #define OS_TASK_IDLE_STK_SIZE   128u   /* Idle       task stack size (# of OS_STK wide entries)        */
 
 

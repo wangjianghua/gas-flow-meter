@@ -75,7 +75,7 @@ typedef unsigned int   OS_CPU_SR;                /* Define size of CPU status re
 #define  OS_CRITICAL_METHOD   3
 
 #if OS_CRITICAL_METHOD == 3
-#define  OS_CPU_SR_ALLOC()    { OS_CPU_SR  cpu_sr = (OS_CPU_SR)0; }
+#define  OS_CPU_SR_ALLOC()      OS_CPU_SR  cpu_sr = (OS_CPU_SR)0
 #else
 #define  OS_CPU_SR_ALLOC()
 #endif

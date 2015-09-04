@@ -243,7 +243,7 @@ typedef  CPU_INT32U  CPU_SR;                                    /* Defines   CPU
 #define  CPU_CFG_CRITICAL_METHOD        CPU_CRITICAL_METHOD_STATUS_LOCAL
 
 #if     (CPU_CFG_CRITICAL_METHOD == CPU_CRITICAL_METHOD_STATUS_LOCAL)
-#define  CPU_SR_ALLOC()                 { CPU_SR  cpu_sr = (CPU_SR)0; }
+#define  CPU_SR_ALLOC()                   CPU_SR  cpu_sr = (CPU_SR)0
 #else
 #define  CPU_SR_ALLOC()
 #endif

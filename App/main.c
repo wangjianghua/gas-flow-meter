@@ -109,6 +109,7 @@ int  main(void)
 */
 static  void  App_TaskStart (void *p_arg)
 {
+    char buf[32];
     INT32U count = 0;
 
     
@@ -122,6 +123,13 @@ static  void  App_TaskStart (void *p_arg)
     OSStatInit();                                               /* Determine CPU capacity                                   */
 #endif   
 
+    GUI_Init();
+
+    sprintf(buf, "»Îµç:");
+    GUI_DispStringAt(buf, 0, 16);  
+    sprintf(buf, "COG12864");
+    GUI_DispRevStringAt(buf, 16, 32);
+
     App_EventCreate();                                          /* Create application events                                */
 
     App_TaskCreate();                                           /* Create application tasks                                 */
@@ -130,8 +138,6 @@ static  void  App_TaskStart (void *p_arg)
         if(!(count % LED_RUN_TOGGLE_PERIOD))
         {
             LED_RUN_TOGGLE();
-
-            clr_wdt();      
         }
 
         count++;

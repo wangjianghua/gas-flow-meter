@@ -21,6 +21,8 @@
 
 #include "led.h"
 #include "key.h"
+#include "lcd.h"
+#include "GUI.h"
 
 
 #endif

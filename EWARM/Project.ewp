@@ -299,6 +299,7 @@
           <state>$PROJ_DIR$\..\Bsp\StdPeriph_Lib\CMSIS\CoreSupport</state>
           <state>$PROJ_DIR$\..\Bsp\StdPeriph_Lib\CMSIS\DeviceSupport</state>
           <state>$PROJ_DIR$\..\Bsp\StdPeriph_Lib\STM32F10x_StdPeriph_Driver\inc</state>
+          <state>$PROJ_DIR$\..\GUI</state>
           <state>$PROJ_DIR$\..\uCOS-II\Ports</state>
           <state>$PROJ_DIR$\..\uCOS-II\Source</state>
           <state>$PROJ_DIR$\..\uCOS-II\uC-CPU</state>
@@ -1824,6 +1825,24 @@
     </settings>
   </configuration>
   <group>
+    <name>App</name>
+    <file>
+      <name>$PROJ_DIR$\..\App\app_hook.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\App\app_vect.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\App\key.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\App\main.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\App\stm32f10x_it.c</name>
+    </file>
+  </group>
+  <group>
     <name>Bsp</name>
     <group>
       <name>StdPeriph_Lib</name>
@@ -1919,7 +1938,19 @@
       <name>$PROJ_DIR$\..\Bsp\bsp_periph.c</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\..\Bsp\lcd.c</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\Bsp\led.c</name>
+    </file>
+  </group>
+  <group>
+    <name>GUI</name>
+    <file>
+      <name>$PROJ_DIR$\..\GUI\Font.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\GUI\GUI.c</name>
     </file>
   </group>
   <group>
@@ -1960,24 +1991,6 @@
         <name>$PROJ_DIR$\..\uCOS-II\uC-LIB\lib_str.c</name>
       </file>
     </group>
-  </group>
-  <group>
-    <name>App</name>
-    <file>
-      <name>$PROJ_DIR$\..\App\app_hook.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\App\app_vect.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\App\key.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\App\main.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\App\stm32f10x_it.c</name>
-    </file>
   </group>
 </project>
 
