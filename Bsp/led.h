@@ -11,8 +11,6 @@
 #define LED_RUN_PORT                GPIOA
 #define LED_RUN_PIN                 GPIO_Pin_12
 
-#define LED_RUN_TOGGLE_PERIOD      (300 / 50)
-
 #define LED_RUN_TOGGLE()            LED_Toggle(LED_RUN)
 
 void LED_On(INT8U led_id);

@@ -110,6 +110,7 @@ int  main(void)
 static  void  App_TaskStart (void *p_arg)
 {
     char buf[32];
+    INT8U new_time[MAX_RTC_TIME_ITEM];
     INT32U count = 0;
 
     
@@ -125,24 +126,50 @@ static  void  App_TaskStart (void *p_arg)
 
     GUI_Init();
 
-    sprintf(buf, "»Îµç:");
-    GUI_DispStringAt(buf, 0, 16);  
-    sprintf(buf, "COG12864");
-    GUI_DispRevStringAt(buf, 16, 32);
+    sprintf(buf, "Ê±¼ä");
+    GUI_DispRevStringAt(buf, 0, 16);  
+
+    new_time[YEAR] = 0x15;
+    new_time[MONTH] = 0x09;
+    new_time[DATE] = 0x04;
+    new_time[WEEK] = 0x05;
+    new_time[HOUR] = 0x16;
+    new_time[MIN] = 0x18;
+    new_time[SEC] = 0x10;
+
+    RTC_WriteTime(new_time);
 
     App_EventCreate();                                          /* Create application events                                */
 
     App_TaskCreate();                                           /* Create application tasks                                 */
         
     while (DEF_TRUE) {                                          /* Task body, always written as an infinite loop            */
-        if(!(count % LED_RUN_TOGGLE_PERIOD))
+        if(!(count % 3))
         {
             LED_RUN_TOGGLE();
         }
 
+        if(!(count % 10))
+        {
+            RTC_ReadTime(g_rtc_time);
+
+            sprintf(buf, " %02x:%02x:%02x", g_rtc_time[HOUR],
+                                            g_rtc_time[MIN],
+                                            g_rtc_time[SEC]);
+            
+            GUI_DispStringAt(buf, 16, 32);
+            
+
+            sprintf(buf, "20%02x-%02x-%02x", g_rtc_time[YEAR],
+                                             g_rtc_time[MONTH],
+                                             g_rtc_time[DATE]);
+            
+            GUI_DispStringAt(buf, 16, 48);            
+        }
+
         count++;
         
-        OSTimeDlyHMSM(0, 0, 0, 50);
+        OSTimeDlyHMSM(0, 0, 0, 100);
     }
 }
 

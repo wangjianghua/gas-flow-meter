@@ -1943,6 +1943,9 @@
     <file>
       <name>$PROJ_DIR$\..\Bsp\led.c</name>
     </file>
+    <file>
+      <name>$PROJ_DIR$\..\Bsp\rtc.c</name>
+    </file>
   </group>
   <group>
     <name>GUI</name>

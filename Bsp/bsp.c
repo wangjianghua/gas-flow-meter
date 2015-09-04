@@ -255,6 +255,17 @@ void LCD_Config(void)
     GPIO_Init(GPIOB, &GPIO_InitStructure);   
 }
 
+void RTC_Config(void)
+{
+    GPIO_InitTypeDef GPIO_InitStructure;
+
+
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6 | GPIO_Pin_7;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(GPIOB, &GPIO_InitStructure);   
+}
+
 void BSP_Init(void)
 {
     /* System clocks configuration ---------------------------------------------*/
@@ -273,6 +284,8 @@ void BSP_Init(void)
     LED_Init();
 
     KEY_Init();
+
+    RTC_Init();
 }
 
 /*

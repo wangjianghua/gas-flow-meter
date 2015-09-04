@@ -337,6 +337,7 @@ void         BSP_PeriphDis               (CPU_DATA       pwr_clk_id);
 void STM32_SoftReset(void);
 void LED_Config(void);
 void LCD_Config(void);
+void RTC_Config(void);
 
 /*
 *********************************************************************************************************

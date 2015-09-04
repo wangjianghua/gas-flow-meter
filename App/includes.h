@@ -23,6 +23,7 @@
 #include "key.h"
 #include "lcd.h"
 #include "GUI.h"
+#include "rtc.h"
 
 
 #endif

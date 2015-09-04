@@ -4,7 +4,7 @@
  * @details  ST7565R驱动
  * @author   华兄
  * @email    591881218@qq.com
- * @date     2014
+ * @date     2015
  * @version  vX.XX
  * @par Copyright (c):  
  *           深圳市合尔凯科技有限公司
