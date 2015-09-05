@@ -1,10 +1,10 @@
 /**
   ******************************************************************************
-  * @file    stm32f10x_it.h 
+  * @file    system_stm32f10x.h
   * @author  MCD Application Team
   * @version V3.5.0
-  * @date    08-April-2011
-  * @brief   This file contains the headers of the interrupt handlers.
+  * @date    11-March-2011
+  * @brief   CMSIS Cortex-M3 Device Peripheral Access Layer System Header File.
   ******************************************************************************
   * @attention
   *
@@ -17,27 +17,82 @@
   *
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
-  */ 
+  */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __STM32F10x_IT_H
-#define __STM32F10x_IT_H
+/** @addtogroup CMSIS
+  * @{
+  */
+
+/** @addtogroup stm32f10x_system
+  * @{
+  */  
+  
+/**
+  * @brief Define to prevent recursive inclusion
+  */
+#ifndef __SYSTEM_STM32F10X_H
+#define __SYSTEM_STM32F10X_H
 
 #ifdef __cplusplus
  extern "C" {
 #endif 
 
-/* Exported types ------------------------------------------------------------*/
-/* Exported constants --------------------------------------------------------*/
-/* Exported macro ------------------------------------------------------------*/
-/* Exported functions ------------------------------------------------------- */
+/** @addtogroup STM32F10x_System_Includes
+  * @{
+  */
 
-void EXTI9_5_IRQHandler(void);
+/**
+  * @}
+  */
+
+
+/** @addtogroup STM32F10x_System_Exported_types
+  * @{
+  */
+
+extern uint32_t SystemCoreClock;          /*!< System Clock Frequency (Core Clock) */
+
+/**
+  * @}
+  */
+
+/** @addtogroup STM32F10x_System_Exported_Constants
+  * @{
+  */
+
+/**
+  * @}
+  */
+
+/** @addtogroup STM32F10x_System_Exported_Macros
+  * @{
+  */
+
+/**
+  * @}
+  */
+
+/** @addtogroup STM32F10x_System_Exported_Functions
+  * @{
+  */
+  
+extern void SystemInit(void);
+extern void SystemCoreClockUpdate(void);
+/**
+  * @}
+  */
 
 #ifdef __cplusplus
 }
 #endif
-					 
-#endif /* __STM32F10x_IT_H */
 
+#endif /*__SYSTEM_STM32F10X_H */
+
+/**
+  * @}
+  */
+  
+/**
+  * @}
+  */  
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/
