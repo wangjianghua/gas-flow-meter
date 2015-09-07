@@ -320,7 +320,7 @@ void         BSP_PeriphDis               (CPU_DATA       pwr_clk_id);
 #define DEBUG_PRINT(s)             
 #endif
 
-#define WDT_EN                       1u
+#define WDT_EN                       0u
 
 #if (WDT_EN > 0u)
 #define clr_wdt()         { IWDG_ReloadCounter(); }
@@ -331,8 +331,8 @@ void         BSP_PeriphDis               (CPU_DATA       pwr_clk_id);
 #define SYS_TICK_PREEMPT_PRIO        0u
 #define SYS_TICK_SUB_PRIO            0u
 
-#define EXTI9_5_PREEMPT_PRIO         1u
-#define EXTI9_5_SUB_PRIO             1u
+#define EXTI_PREEMPT_PRIO            1u
+#define EXTI_SUB_PRIO                1u
 
 void STM32_SoftReset(void);
 void LED_Config(void);

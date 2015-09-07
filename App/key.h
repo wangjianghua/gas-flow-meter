@@ -9,7 +9,14 @@
 #define KEY_PORT_NULL           NULL
 #define KEY_MSG_NONE           (!(GPIO_Pin_All))
 
+#define KEY_PORT                GPIOA
+
 #define KEY_MSG_SET             GPIO_Pin_7
+#define KEY_MSG_DEC             GPIO_Pin_6
+#define KEY_MSG_INC             GPIO_Pin_5
+#define KEY_MSG_CONFIRM         GPIO_Pin_4
+#define KEY_MSG_CLEAR           GPIO_Pin_1
+#define KEY_MSG_PAUSE           GPIO_Pin_0
 
 typedef struct {
     GPIO_TypeDef *GPIOx;

@@ -32,6 +32,9 @@
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 
+void EXTI0_IRQHandler(void);
+void EXTI1_IRQHandler(void);
+void EXTI4_IRQHandler(void);
 void EXTI9_5_IRQHandler(void);
 
 #ifdef __cplusplus

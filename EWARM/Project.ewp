@@ -1833,13 +1833,22 @@
       <name>$PROJ_DIR$\..\APP\app_vect.c</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\..\APP\common.c</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\APP\key.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\..\APP\main.c</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\..\APP\menu.c</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\APP\stm32f10x_it.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\APP\time.c</name>
     </file>
   </group>
   <group>

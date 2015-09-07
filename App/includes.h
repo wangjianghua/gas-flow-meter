@@ -24,6 +24,9 @@
 #include "lcd.h"
 #include "GUI.h"
 #include "rtc.h"
+#include "common.h"
+#include "menu.h"
+#include "time.h"
 
 
 #endif

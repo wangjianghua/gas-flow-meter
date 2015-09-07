@@ -38,6 +38,7 @@
 
 #define  APP_CFG_TASK_START_PRIO               2u
 #define  APP_CFG_TASK_KEY_PRIO                 3u
+#define  APP_CFG_TASK_TIME_PRIO                4u
 #define  OS_TASK_TMR_PRIO             (OS_LOWEST_PRIO - 2)
 
 /*
@@ -48,6 +49,7 @@
 
 #define  APP_CFG_TASK_START_STK_SIZE         128u
 #define  APP_CFG_TASK_KEY_STK_SIZE           128u
+#define  APP_CFG_TASK_TIME_STK_SIZE          128u
 
 /*
 *********************************************************************************************************

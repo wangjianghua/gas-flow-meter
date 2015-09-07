@@ -36,6 +36,51 @@
 /******************************************************************************/
 
 /**
+  * @brief  This function handles External line 0 interrupt request.
+  * @param  None
+  * @retval None
+  */
+void EXTI0_IRQHandler(void)
+{
+    if(RESET != EXTI_GetITStatus(EXTI_Line0)) 
+    { 
+        EXTI_ClearITPendingBit(EXTI_Line0);
+        
+        GUI_X_StoreKey(KEY_PORT, KEY_MSG_PAUSE);
+    }    
+}
+
+/**
+  * @brief  This function handles External line 1 interrupt request.
+  * @param  None
+  * @retval None
+  */
+void EXTI1_IRQHandler(void)
+{
+    if(RESET != EXTI_GetITStatus(EXTI_Line1)) 
+    { 
+        EXTI_ClearITPendingBit(EXTI_Line1);
+        
+        GUI_X_StoreKey(KEY_PORT, KEY_MSG_CLEAR);
+    }    
+}
+
+/**
+  * @brief  This function handles External line 4 interrupt request.
+  * @param  None
+  * @retval None
+  */
+void EXTI4_IRQHandler(void)
+{
+    if(RESET != EXTI_GetITStatus(EXTI_Line4)) 
+    { 
+        EXTI_ClearITPendingBit(EXTI_Line4);
+        
+        GUI_X_StoreKey(KEY_PORT, KEY_MSG_CONFIRM);
+    }    
+}
+
+/**
   * @brief  This function handles External lines 9 to 5 interrupt request.
   * @param  None
   * @retval None
@@ -46,7 +91,19 @@ void EXTI9_5_IRQHandler(void)
     { 
         EXTI_ClearITPendingBit(EXTI_Line7);
         
-        GUI_X_StoreKey(GPIOA, GPIO_Pin_7);
+        GUI_X_StoreKey(KEY_PORT, KEY_MSG_SET);
+    }
+    else if(RESET != EXTI_GetITStatus(EXTI_Line6)) 
+    { 
+        EXTI_ClearITPendingBit(EXTI_Line6);
+        
+        GUI_X_StoreKey(KEY_PORT, KEY_MSG_DEC);
+    }
+    else if(RESET != EXTI_GetITStatus(EXTI_Line5)) 
+    { 
+        EXTI_ClearITPendingBit(EXTI_Line5);
+        
+        GUI_X_StoreKey(KEY_PORT, KEY_MSG_INC);
     }
 }
 

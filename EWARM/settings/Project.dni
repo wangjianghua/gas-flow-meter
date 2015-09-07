@@ -1,5 +1,5 @@
 [DebugChecksum]
-Checksum=642414454
+Checksum=97506873
 [Stack]
 FillEnabled=0
 OverflowWarningsEnabled=1
@@ -34,6 +34,8 @@ ITMportsEnable=0
 ITMportsTermIO=0
 ITMportsLogFile=0
 ITMlogFile=$PROJ_DIR$\ITM.log
+[watch_formats]
+Fmt0={W}42:cur_sec	3	0
 [PowerLog]
 LogEnabled=0
 GraphEnabled=0

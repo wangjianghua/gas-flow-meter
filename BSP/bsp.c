@@ -215,28 +215,90 @@ void KEY_Init(void)
     
 
     /* Configure Button GPIOx Pin as input floating */
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7;
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
     GPIO_Init(GPIOA, &GPIO_InitStructure);
     
     /* Connect EXTIx Line to Button GPIOx Pin */
-    GPIO_EXTILineConfig(GPIO_PortSourceGPIOA, GPIO_PinSource7);
+    GPIO_EXTILineConfig(GPIO_PortSourceGPIOA, GPIO_PinSource0 | GPIO_PinSource1 | GPIO_PinSource4 | GPIO_PinSource5 | GPIO_PinSource6 | GPIO_PinSource7);
+
+    /* Configure EXTIx Line */
+    EXTI_InitStructure.EXTI_Line = EXTI_Line0;
+    EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+    EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling;  
+    EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+    EXTI_Init(&EXTI_InitStructure);
+
+    /* Configure EXTIx Line */
+    EXTI_InitStructure.EXTI_Line = EXTI_Line1;
+    EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+    EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling;  
+    EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+    EXTI_Init(&EXTI_InitStructure);
+
+    /* Configure EXTIx Line */
+    EXTI_InitStructure.EXTI_Line = EXTI_Line4;
+    EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+    EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling;  
+    EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+    EXTI_Init(&EXTI_InitStructure); 
+
+    /* Configure EXTIx Line */
+    EXTI_InitStructure.EXTI_Line = EXTI_Line5;
+    EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+    EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling;  
+    EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+    EXTI_Init(&EXTI_InitStructure);
+
+    /* Configure EXTIx Line */
+    EXTI_InitStructure.EXTI_Line = EXTI_Line6;
+    EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+    EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling;  
+    EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+    EXTI_Init(&EXTI_InitStructure);
 
     /* Configure EXTIx Line */
     EXTI_InitStructure.EXTI_Line = EXTI_Line7;
     EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
     EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling;  
     EXTI_InitStructure.EXTI_LineCmd = ENABLE;
-    EXTI_Init(&EXTI_InitStructure); 
+    EXTI_Init(&EXTI_InitStructure);
+
+    /* Assign ISR handler */
+	BSP_IntVectSet(BSP_INT_ID_EXTI0, EXTI0_IRQHandler);
+
+    /* Assign ISR priority */
+    BSP_IntPrioSet(BSP_INT_ID_EXTI0, STM32_EncodePriority(EXTI_PREEMPT_PRIO, EXTI_SUB_PRIO));
+
+    /* Enable EXTIx Interrupt */
+	BSP_IntEn(BSP_INT_ID_EXTI0);
+
+    /* Assign ISR handler */
+	BSP_IntVectSet(BSP_INT_ID_EXTI1, EXTI1_IRQHandler);
+
+    /* Assign ISR priority */
+    BSP_IntPrioSet(BSP_INT_ID_EXTI1, STM32_EncodePriority(EXTI_PREEMPT_PRIO, EXTI_SUB_PRIO));
+
+    /* Enable EXTIx Interrupt */
+	BSP_IntEn(BSP_INT_ID_EXTI1);
+
+    /* Assign ISR handler */
+	BSP_IntVectSet(BSP_INT_ID_EXTI4, EXTI4_IRQHandler);
+
+    /* Assign ISR priority */
+    BSP_IntPrioSet(BSP_INT_ID_EXTI4, STM32_EncodePriority(EXTI_PREEMPT_PRIO, EXTI_SUB_PRIO));
+
+    /* Enable EXTIx Interrupt */
+	BSP_IntEn(BSP_INT_ID_EXTI4);
 
     /* Assign ISR handler */
 	BSP_IntVectSet(BSP_INT_ID_EXTI9_5, EXTI9_5_IRQHandler);
 
     /* Assign ISR priority */
-    BSP_IntPrioSet(BSP_INT_ID_EXTI9_5, STM32_EncodePriority(EXTI9_5_PREEMPT_PRIO, EXTI9_5_SUB_PRIO));
+    BSP_IntPrioSet(BSP_INT_ID_EXTI9_5, STM32_EncodePriority(EXTI_PREEMPT_PRIO, EXTI_SUB_PRIO));
 
     /* Enable EXTIx Interrupt */
-	BSP_IntEn(BSP_INT_ID_EXTI9_5);    
+	BSP_IntEn(BSP_INT_ID_EXTI9_5);        
 }
 
 void LCD_Config(void)

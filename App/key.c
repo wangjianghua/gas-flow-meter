@@ -64,19 +64,18 @@ void  GUI_X_StoreKey (GPIO_TypeDef *GPIOx, INT16U GPIO_Pin)
 
 void  GUI_X_KeyProc (int k)
 {
+    int form_msg;
     INT32U key_msg;
 
 
     key_msg = k;
-    
-    switch(key_msg)
+
+    if(NULL != form_list[form_id].fnct)
     {
-    case KEY_MSG_SET:
-        STM32_SoftReset();
-        break;
-        
-    default:
-        break;
+        if(FORM_MSG_NONE != (form_msg = (*form_list[form_id].fnct)(key_msg, FORM_MSG_KEY)))
+        {
+            (*form_list[form_id].fnct)(key_msg, form_msg);
+        }
     }
 }
 
@@ -88,14 +87,14 @@ void  GUI_X_KeyProc (int k)
 *
 * Argument(s) : p_arg   is the argument passed to 'App_TaskKey()' by 'OSTaskCreateExt()'.
 *
-* Return(s)  : none.
+* Return(s)   : none.
 *
-* Caller(s)  : This is a task.
+* Caller(s)   : This is a task.
 *
-* Note(s)    : none.
+* Note(s)     : none.
 *********************************************************************************************************
 */
-void App_TaskKey(void *p_arg)
+void  App_TaskKey (void *p_arg)
 {
     INT32U key_msg;
 
