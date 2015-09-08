@@ -122,7 +122,9 @@ static  void  App_TaskStart (void *p_arg)
 
     GUI_Init(); 
 
-    form_init();
+    MENU_Init();
+
+    TIME_Init();
 
     App_EventCreate();                                          /* Create application events                                */
 

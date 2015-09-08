@@ -1842,6 +1842,9 @@
       <name>$PROJ_DIR$\..\APP\main.c</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\..\APP\mems.c</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\APP\menu.c</name>
     </file>
     <file>

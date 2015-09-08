@@ -64,19 +64,9 @@ void  GUI_X_StoreKey (GPIO_TypeDef *GPIOx, INT16U GPIO_Pin)
 
 void  GUI_X_KeyProc (int k)
 {
-    int form_msg;
-    INT32U key_msg;
+    menu_key_proc(k);
 
-
-    key_msg = k;
-
-    if(NULL != form_list[form_id].fnct)
-    {
-        if(FORM_MSG_NONE != (form_msg = (*form_list[form_id].fnct)(key_msg, FORM_MSG_KEY)))
-        {
-            (*form_list[form_id].fnct)(key_msg, form_msg);
-        }
-    }
+    time_key_proc(k);
 }
 
 /*
@@ -96,7 +86,7 @@ void  GUI_X_KeyProc (int k)
 */
 void  App_TaskKey (void *p_arg)
 {
-    INT32U key_msg;
+    int key_msg;
 
     
     (void)p_arg; 

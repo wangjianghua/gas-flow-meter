@@ -27,6 +27,7 @@
 #include "common.h"
 #include "menu.h"
 #include "time.h"
+#include "mems.h"
 
 
 #endif

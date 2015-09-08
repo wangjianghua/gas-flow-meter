@@ -2,6 +2,48 @@
 
 
 TIME_COUNT g_time_count;
+ALARM_TIME g_alarm_time;
+TIME_COUNT_CTRL g_time_count_ctrl;
+
+void TIME_Init(void)
+{
+    g_time_count_ctrl = TIME_COUNT_PAUSE;
+
+    memset(&g_time_count, 0, sizeof(TIME_COUNT));
+
+    memset(&g_alarm_time, 0, sizeof(ALARM_TIME));
+}
+
+void time_key_proc(int key_msg)
+{
+    switch(key_msg)
+    {
+    case KEY_MSG_PAUSE:
+        if(TIME_COUNT_RUN == g_time_count_ctrl)
+        {
+            g_time_count_ctrl = TIME_COUNT_PAUSE;
+        }
+        else if(TIME_COUNT_PAUSE == g_time_count_ctrl)
+        {
+            g_time_count_ctrl = TIME_COUNT_RUN;
+        }
+        else
+        {
+
+        }
+        break;
+
+    case KEY_MSG_CLEAR:
+        if(TIME_COUNT_FINISH != g_time_count_ctrl)
+        {
+            memset(&g_time_count, 0, sizeof(TIME_COUNT));
+        }
+        break;
+
+    default:
+        break;
+    }
+}
 
 /*
 *********************************************************************************************************
@@ -20,21 +62,25 @@ TIME_COUNT g_time_count;
 */
 void  App_TaskTime (void *p_arg)
 {   
-    INT8U cur_sec = 0, last_sec = 0;
+    INT8U cur_sec, last_sec;
 
     
     (void)p_arg; 
+
+    RTC_ReadTime(g_rtc_time);
+
+    last_sec = Bcd2Hex(g_rtc_time[SEC]);
     
     while (DEF_TRUE) {  
         LED_RUN_TOGGLE();
 
-        form_refresh();
+        menu_refresh();
 
         RTC_ReadTime(g_rtc_time);
 
         cur_sec = Bcd2Hex(g_rtc_time[SEC]);
 
-        if(last_sec != cur_sec)
+        if((TIME_COUNT_RUN == g_time_count_ctrl) && (last_sec != cur_sec))
         { 
             g_time_count.second += (last_sec < cur_sec) ? (cur_sec - last_sec) : (cur_sec + 60 - last_sec);
 
@@ -60,6 +106,10 @@ void  App_TaskTime (void *p_arg)
                     }
                 }
             }
+        }
+        else
+        {
+            last_sec = cur_sec;
         }
         
         OSTimeDlyHMSM(0, 0, 1, 0);

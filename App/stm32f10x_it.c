@@ -97,13 +97,13 @@ void EXTI9_5_IRQHandler(void)
     { 
         EXTI_ClearITPendingBit(EXTI_Line6);
         
-        GUI_X_StoreKey(KEY_PORT, KEY_MSG_DEC);
+        GUI_X_StoreKey(KEY_PORT, KEY_MSG_DOWN);
     }
     else if(RESET != EXTI_GetITStatus(EXTI_Line5)) 
     { 
         EXTI_ClearITPendingBit(EXTI_Line5);
         
-        GUI_X_StoreKey(KEY_PORT, KEY_MSG_INC);
+        GUI_X_StoreKey(KEY_PORT, KEY_MSG_UP);
     }
 }
 

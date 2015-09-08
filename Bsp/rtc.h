@@ -24,6 +24,8 @@
 
 #define RTC_TIME_REG_ADDR       0u
 
+#define MAX_WEEK_ITEM           7u
+
 typedef enum {
     I2C_ADDR_WRITE = 0xD0,
     I2C_ADDR_READ = 0xD1
