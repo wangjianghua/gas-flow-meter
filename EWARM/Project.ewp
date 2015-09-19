@@ -1836,10 +1836,19 @@
       <name>$PROJ_DIR$\..\APP\common.c</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\..\APP\DL645.c</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\APP\key.c</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\..\APP\link_manager.c</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\APP\main.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\APP\memory.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\..\APP\mems.c</name>
@@ -1848,10 +1857,19 @@
       <name>$PROJ_DIR$\..\APP\menu.c</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\..\APP\pc.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\APP\queue.c</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\APP\stm32f10x_it.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\..\APP\time.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\APP\uart_link.c</name>
     </file>
   </group>
   <group>
@@ -1941,6 +1959,9 @@
       </group>
     </group>
     <file>
+      <name>$PROJ_DIR$\..\BSP\beep.c</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\BSP\bsp.c</name>
     </file>
     <file>
@@ -1954,6 +1975,9 @@
     </file>
     <file>
       <name>$PROJ_DIR$\..\BSP\led.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\BSP\relay.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\..\BSP\rtc.c</name>

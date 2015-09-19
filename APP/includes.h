@@ -19,15 +19,23 @@
 #include <app_cfg.h>
 #include <bsp.h>
 
+#include "DL645.h"
+#include "queue.h"
+#include "link_manager.h"
+#include "uart_link.h"
+#include "memory.h"
 #include "led.h"
 #include "key.h"
 #include "lcd.h"
 #include "GUI.h"
 #include "rtc.h"
+#include "beep.h"
+#include "relay.h"
 #include "common.h"
 #include "menu.h"
 #include "time.h"
 #include "mems.h"
+#include "pc.h"
 
 
 #endif

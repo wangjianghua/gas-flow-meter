@@ -4,7 +4,7 @@
 const char SOFTWARE_VERSION[] = {0x20, 0x15, 0x06, 0x29, 0x26};
 const char HARDWARE_VERSION[] = {0x20, 0x15, 0x01, 0x25, 0x20};
 
-const char DaysOfMonth[]= {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+const char DaysOfMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 unsigned char Bcd2Hex(unsigned char bcd)
 {

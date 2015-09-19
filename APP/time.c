@@ -11,7 +11,20 @@ void TIME_Init(void)
 
     memset(&g_time_count, 0, sizeof(TIME_COUNT));
 
-    memset(&g_alarm_time, 0, sizeof(ALARM_TIME));
+    g_alarm_time.hour = MAX_TIME_COUNT;
+    g_alarm_time.minute = 59;
+}
+
+void time_relay_proc(void)
+{
+    if(TIME_COUNT_RUN == g_time_count_ctrl)
+    {
+        relay_turn_on();
+    }
+    else
+    {
+        relay_turn_off();
+    }
 }
 
 void time_key_proc(int key_msg)
@@ -29,7 +42,9 @@ void time_key_proc(int key_msg)
         }
         else
         {
+            memset(&g_time_count, 0, sizeof(TIME_COUNT));
 
+            g_time_count_ctrl = TIME_COUNT_RUN;
         }
         break;
 
@@ -43,6 +58,17 @@ void time_key_proc(int key_msg)
     default:
         break;
     }
+
+    time_relay_proc();
+}
+
+void time_alarm_proc(void)
+{
+    g_time_count_ctrl = TIME_COUNT_FINISH;
+
+    beep_on();
+
+    time_relay_proc();
 }
 
 /*
@@ -98,13 +124,19 @@ void  App_TaskTime (void *p_arg)
 
                     g_time_count.hour++;
 
-                    if(g_time_count.hour >= MAX_TIME_COUNT)
+                    if(g_time_count.hour > MAX_TIME_COUNT)
                     {
                         g_time_count.hour = 0;
                         g_time_count.minute = 0;
                         g_time_count.second = 0;
                     }
                 }
+            }
+
+            if((g_alarm_time.hour == g_time_count.hour) && 
+               (g_alarm_time.minute == g_time_count.minute))
+            {
+                time_alarm_proc();
             }
         }
         else

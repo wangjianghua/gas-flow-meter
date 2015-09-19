@@ -2003,6 +2003,26 @@ GUI_FLASH  const static unsigned char acFontHZ_B1EA[32] = {
   ________,________,
 };
 
+/* char: 出   code:0xB3F6 */
+GUI_FLASH  const static unsigned char acFontHZ_B3F6[32] = { 
+  ________,________,
+  _______X,________,
+  _______X,X_______,
+  _______X,________,
+  _______X,________,
+  ___XX__X,____X___,
+  ___X___X,____X___,
+  ___X___X,XXXX____,
+  ___XXXXX,___X____,
+  _______X,________,
+  ___X___X,____X___,
+  ___X___X,____X___,
+  ___X___X,XXXXX___,
+  ___XXXX_,___X____,
+  ________,________,
+  ________,________,
+};
+
 /* char: 存   code:0xB4E6 */
 GUI_FLASH  const static unsigned char acFontHZ_B4E6[32] = { 
   ________,________,
@@ -2283,26 +2303,6 @@ GUI_FLASH  const static unsigned char acFontHZ_C6F8[32] = {
   ________,________,
 };
 
-/* char: 取   code:0xC8A1 */
-GUI_FLASH  const static unsigned char acFontHZ_C8A1[32] = { 
-  ________,________,
-  ________,________,
-  ________,________,
-  __XXXXXX,________,
-  ___X__X_,___X____,
-  ___X__X_,XXXXX___,
-  ___XXXX_,X__X____,
-  ___X__X_,_X_X____,
-  ___XXXX_,_X_X____,
-  ___X__XX,__X_____,
-  ___XXXX_,_X_X____,
-  _XXX__X_,X___XX__,
-  ______XX,________,
-  ______X_,________,
-  ________,________,
-  ________,________,
-};
-
 /* char: 确   code:0xC8B7 */
 GUI_FLASH  const static unsigned char acFontHZ_C8B7[32] = { 
   ________,________,
@@ -2483,6 +2483,26 @@ GUI_FLASH  const static unsigned char acFontHZ_CDA3[32] = {
   ________,________,
 };
 
+/* char: 退   code:0xCDCB */
+GUI_FLASH  const static unsigned char acFontHZ_CDCB[32] = { 
+  ________,________,
+  ________,________,
+  ________,_XXX____,
+  ___XX__X,X_XX____,
+  ____X__X,_XX_____,
+  _______X,X_X_____,
+  _______X,_XX_X___,
+  _XXXX__X,X__X____,
+  ___X___X,XXX_____,
+  ___X___X,___XX___,
+  ____X__X,_XX_XX__,
+  ____X__X,X_______,
+  _XXX_XX_,________,
+  _______X,XXXXXXX_,
+  ________,________,
+  ________,________,
+};
+
 /* char: 完   code:0xCDEA */
 GUI_FLASH  const static unsigned char acFontHZ_CDEA[32] = { 
   ________,________,
@@ -2520,26 +2540,6 @@ GUI_FLASH  const static unsigned char acFontHZ_CEE5[32] = {
   _____XXX,XXXXXXX_,
   _XXXX___,________,
   ________,________,
-  ________,________,
-};
-
-/* char: 消   code:0xCFFB */
-GUI_FLASH  const static unsigned char acFontHZ_CFFB[32] = { 
-  ________,________,
-  ________,________,
-  ________,_X___X__,
-  ____X___,_X__XX__,
-  ______X_,_X_X____,
-  ________,_X______,
-  __X_____,_XXXX___,
-  ___X___X,X___X___,
-  _______X,XXX_X___,
-  ___XX__X,____X___,
-  ___X___X,XXX_X___,
-  __XX___X,____X___,
-  __X___X_,____X___,
-  ______X_,__XXX___,
-  ________,____X___,
   ________,________,
 };
 
@@ -2763,21 +2763,21 @@ GUI_FLASH const static GUI_CHARINFO GUI_FontHZ_16x16_CharInfo[132] = {
   { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_B1A3 }, /*96: 保*/
   { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_B1CF }, /*97: 毕*/
   { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_B1EA }, /*98: 标*/
-  { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_B4E6 }, /*99: 存*/
-  { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_B6A8 }, /*100: 定*/
-  { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_B6FE }, /*101: 二*/
-  { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_B7D6 }, /*102: 分*/
-  { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_BCC6 }, /*103: 计*/
-  { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_BCE4 }, /*104: 间*/
-  { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_BCFE }, /*105: 件*/
-  { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_C1BF }, /*106: 量*/
-  { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_C1F7 }, /*107: 流*/
-  { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_C1F9 }, /*108: 六*/
-  { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_C3EB }, /*109: 秒*/
-  { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_C4BF }, /*110: 目*/
-  { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_C6DA }, /*111: 期*/
-  { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_C6F8 }, /*112: 气*/
-  { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_C8A1 }, /*113: 取*/
+  { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_B3F6 }, /*99: 出*/
+  { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_B4E6 }, /*100: 存*/
+  { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_B6A8 }, /*101: 定*/
+  { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_B6FE }, /*102: 二*/
+  { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_B7D6 }, /*103: 分*/
+  { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_BCC6 }, /*104: 计*/
+  { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_BCE4 }, /*105: 间*/
+  { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_BCFE }, /*106: 件*/
+  { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_C1BF }, /*107: 量*/
+  { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_C1F7 }, /*108: 流*/
+  { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_C1F9 }, /*109: 六*/
+  { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_C3EB }, /*110: 秒*/
+  { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_C4BF }, /*111: 目*/
+  { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_C6DA }, /*112: 期*/
+  { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_C6F8 }, /*113: 气*/
   { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_C8B7 }, /*114: 确*/
   { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_C8CF }, /*115: 认*/
   { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_C8D5 }, /*116: 日*/
@@ -2787,9 +2787,9 @@ GUI_FLASH const static GUI_CHARINFO GUI_FontHZ_16x16_CharInfo[132] = {
   { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_CBC4 }, /*120: 四*/
   { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_CCE5 }, /*121: 体*/
   { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_CDA3 }, /*122: 停*/
-  { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_CDEA }, /*123: 完*/
-  { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_CEE5 }, /*124: 五*/
-  { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_CFFB }, /*125: 消*/
+  { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_CDCB }, /*123: 退*/
+  { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_CDEA }, /*124: 完*/
+  { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_CEE5 }, /*125: 五*/
   { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_D0C7 }, /*126: 星*/
   { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_D0D0 }, /*127: 行*/
   { 16, 16, 2, (void GUI_FLASH *)&acFontHZ_D2BB }, /*128: 一*/
@@ -2847,24 +2847,24 @@ GUI_FLASH const static GUI_FONT_PROP GUI_FontHZ_16x16_Prop32 = {
 
 
 GUI_FLASH const static GUI_FONT_PROP GUI_FontHZ_16x16_Prop31 = {
-  0xCFFB, /*start :消*/
-  0xCFFB, /*end   :消,  len=1*/
+  0xCEE5, /*start :五*/
+  0xCEE5, /*end   :五,  len=1*/
   &GUI_FontHZ_16x16_CharInfo[ 125 ],
   &GUI_FontHZ_16x16_Prop32
 };
 
 
 GUI_FLASH const static GUI_FONT_PROP GUI_FontHZ_16x16_Prop30 = {
-  0xCEE5, /*start :五*/
-  0xCEE5, /*end   :五,  len=1*/
+  0xCDEA, /*start :完*/
+  0xCDEA, /*end   :完,  len=1*/
   &GUI_FontHZ_16x16_CharInfo[ 124 ],
   &GUI_FontHZ_16x16_Prop31
 };
 
 
 GUI_FLASH const static GUI_FONT_PROP GUI_FontHZ_16x16_Prop29 = {
-  0xCDEA, /*start :完*/
-  0xCDEA, /*end   :完,  len=1*/
+  0xCDCB, /*start :退*/
+  0xCDCB, /*end   :退,  len=1*/
   &GUI_FontHZ_16x16_CharInfo[ 123 ],
   &GUI_FontHZ_16x16_Prop30
 };
@@ -2943,120 +2943,120 @@ GUI_FLASH const static GUI_FONT_PROP GUI_FontHZ_16x16_Prop20 = {
 
 
 GUI_FLASH const static GUI_FONT_PROP GUI_FontHZ_16x16_Prop19 = {
-  0xC8A1, /*start :取*/
-  0xC8A1, /*end   :取,  len=1*/
+  0xC6F8, /*start :气*/
+  0xC6F8, /*end   :气,  len=1*/
   &GUI_FontHZ_16x16_CharInfo[ 113 ],
   &GUI_FontHZ_16x16_Prop20
 };
 
 
 GUI_FLASH const static GUI_FONT_PROP GUI_FontHZ_16x16_Prop18 = {
-  0xC6F8, /*start :气*/
-  0xC6F8, /*end   :气,  len=1*/
+  0xC6DA, /*start :期*/
+  0xC6DA, /*end   :期,  len=1*/
   &GUI_FontHZ_16x16_CharInfo[ 112 ],
   &GUI_FontHZ_16x16_Prop19
 };
 
 
 GUI_FLASH const static GUI_FONT_PROP GUI_FontHZ_16x16_Prop17 = {
-  0xC6DA, /*start :期*/
-  0xC6DA, /*end   :期,  len=1*/
+  0xC4BF, /*start :目*/
+  0xC4BF, /*end   :目,  len=1*/
   &GUI_FontHZ_16x16_CharInfo[ 111 ],
   &GUI_FontHZ_16x16_Prop18
 };
 
 
 GUI_FLASH const static GUI_FONT_PROP GUI_FontHZ_16x16_Prop16 = {
-  0xC4BF, /*start :目*/
-  0xC4BF, /*end   :目,  len=1*/
+  0xC3EB, /*start :秒*/
+  0xC3EB, /*end   :秒,  len=1*/
   &GUI_FontHZ_16x16_CharInfo[ 110 ],
   &GUI_FontHZ_16x16_Prop17
 };
 
 
 GUI_FLASH const static GUI_FONT_PROP GUI_FontHZ_16x16_Prop15 = {
-  0xC3EB, /*start :秒*/
-  0xC3EB, /*end   :秒,  len=1*/
+  0xC1F9, /*start :六*/
+  0xC1F9, /*end   :六,  len=1*/
   &GUI_FontHZ_16x16_CharInfo[ 109 ],
   &GUI_FontHZ_16x16_Prop16
 };
 
 
 GUI_FLASH const static GUI_FONT_PROP GUI_FontHZ_16x16_Prop14 = {
-  0xC1F9, /*start :六*/
-  0xC1F9, /*end   :六,  len=1*/
+  0xC1F7, /*start :流*/
+  0xC1F7, /*end   :流,  len=1*/
   &GUI_FontHZ_16x16_CharInfo[ 108 ],
   &GUI_FontHZ_16x16_Prop15
 };
 
 
 GUI_FLASH const static GUI_FONT_PROP GUI_FontHZ_16x16_Prop13 = {
-  0xC1F7, /*start :流*/
-  0xC1F7, /*end   :流,  len=1*/
+  0xC1BF, /*start :量*/
+  0xC1BF, /*end   :量,  len=1*/
   &GUI_FontHZ_16x16_CharInfo[ 107 ],
   &GUI_FontHZ_16x16_Prop14
 };
 
 
 GUI_FLASH const static GUI_FONT_PROP GUI_FontHZ_16x16_Prop12 = {
-  0xC1BF, /*start :量*/
-  0xC1BF, /*end   :量,  len=1*/
+  0xBCFE, /*start :件*/
+  0xBCFE, /*end   :件,  len=1*/
   &GUI_FontHZ_16x16_CharInfo[ 106 ],
   &GUI_FontHZ_16x16_Prop13
 };
 
 
 GUI_FLASH const static GUI_FONT_PROP GUI_FontHZ_16x16_Prop11 = {
-  0xBCFE, /*start :件*/
-  0xBCFE, /*end   :件,  len=1*/
+  0xBCE4, /*start :间*/
+  0xBCE4, /*end   :间,  len=1*/
   &GUI_FontHZ_16x16_CharInfo[ 105 ],
   &GUI_FontHZ_16x16_Prop12
 };
 
 
 GUI_FLASH const static GUI_FONT_PROP GUI_FontHZ_16x16_Prop10 = {
-  0xBCE4, /*start :间*/
-  0xBCE4, /*end   :间,  len=1*/
+  0xBCC6, /*start :计*/
+  0xBCC6, /*end   :计,  len=1*/
   &GUI_FontHZ_16x16_CharInfo[ 104 ],
   &GUI_FontHZ_16x16_Prop11
 };
 
 
 GUI_FLASH const static GUI_FONT_PROP GUI_FontHZ_16x16_Prop9 = {
-  0xBCC6, /*start :计*/
-  0xBCC6, /*end   :计,  len=1*/
+  0xB7D6, /*start :分*/
+  0xB7D6, /*end   :分,  len=1*/
   &GUI_FontHZ_16x16_CharInfo[ 103 ],
   &GUI_FontHZ_16x16_Prop10
 };
 
 
 GUI_FLASH const static GUI_FONT_PROP GUI_FontHZ_16x16_Prop8 = {
-  0xB7D6, /*start :分*/
-  0xB7D6, /*end   :分,  len=1*/
+  0xB6FE, /*start :二*/
+  0xB6FE, /*end   :二,  len=1*/
   &GUI_FontHZ_16x16_CharInfo[ 102 ],
   &GUI_FontHZ_16x16_Prop9
 };
 
 
 GUI_FLASH const static GUI_FONT_PROP GUI_FontHZ_16x16_Prop7 = {
-  0xB6FE, /*start :二*/
-  0xB6FE, /*end   :二,  len=1*/
+  0xB6A8, /*start :定*/
+  0xB6A8, /*end   :定,  len=1*/
   &GUI_FontHZ_16x16_CharInfo[ 101 ],
   &GUI_FontHZ_16x16_Prop8
 };
 
 
 GUI_FLASH const static GUI_FONT_PROP GUI_FontHZ_16x16_Prop6 = {
-  0xB6A8, /*start :定*/
-  0xB6A8, /*end   :定,  len=1*/
+  0xB4E6, /*start :存*/
+  0xB4E6, /*end   :存,  len=1*/
   &GUI_FontHZ_16x16_CharInfo[ 100 ],
   &GUI_FontHZ_16x16_Prop7
 };
 
 
 GUI_FLASH const static GUI_FONT_PROP GUI_FontHZ_16x16_Prop5 = {
-  0xB4E6, /*start :存*/
-  0xB4E6, /*end   :存,  len=1*/
+  0xB3F6, /*start :出*/
+  0xB3F6, /*end   :出,  len=1*/
   &GUI_FontHZ_16x16_CharInfo[ 99 ],
   &GUI_FontHZ_16x16_Prop6
 };
@@ -3108,7 +3108,7 @@ GUI_FLASH const GUI_FONT GUI_FontTable = {
  /** 
   * @file     Font.c
   * @brief    字库(配置: 宽16、高16，水平居左、垂直居中，字体排序、自动加上ASCII码表，楷体、常规、小四) 
-  * @details  气体流量计定时运行暂停完毕星期一二三四五六日软硬件间分秒确认取消目标保存
+  * @details  气体流量计定时运行暂停完毕星期一二三四五六日软硬件间分秒确认退出目标保存
   * @author   华兄
   * @email    591881218@qq.com
   * @date     2015

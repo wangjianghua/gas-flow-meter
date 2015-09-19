@@ -334,10 +334,18 @@ void         BSP_PeriphDis               (CPU_DATA       pwr_clk_id);
 #define EXTI_PREEMPT_PRIO            1u
 #define EXTI_SUB_PRIO                1u
 
+#define USART1_PREEMPT_PRIO          1u
+#define USART1_SUB_PRIO              0u
+
+#define USART2_PREEMPT_PRIO          1u
+#define USART2_SUB_PRIO              0u
+
 void STM32_SoftReset(void);
 void LED_Config(void);
 void LCD_Config(void);
 void RTC_Config(void);
+void BEEP_Config(void);
+void RELAY_Config(void);
 
 /*
 *********************************************************************************************************

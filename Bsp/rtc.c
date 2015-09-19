@@ -23,8 +23,8 @@ void RTC_CfgSDAOut(void)
 
 
     GPIO_InitStructure.GPIO_Pin = RTC_SDA_PIN;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD;
     GPIO_Init(RTC_I2C_PORT, &GPIO_InitStructure);
 }
 

@@ -203,9 +203,14 @@ void LED_Config(void)
       
 
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
     GPIO_Init(GPIOA, &GPIO_InitStructure);
+
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4 | GPIO_Pin_5;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+    GPIO_Init(GPIOB, &GPIO_InitStructure);    
 }
 
 void KEY_Init(void)
@@ -307,13 +312,13 @@ void LCD_Config(void)
 
 
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8 | GPIO_Pin_11;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
     GPIO_Init(GPIOA, &GPIO_InitStructure);
 
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11 | GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_15;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
     GPIO_Init(GPIOB, &GPIO_InitStructure);   
 }
 
@@ -323,8 +328,142 @@ void RTC_Config(void)
 
 
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6 | GPIO_Pin_7;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD;
+    GPIO_Init(GPIOB, &GPIO_InitStructure);   
+}
+
+void USART1_Init(void)
+{
+    GPIO_InitTypeDef GPIO_InitStructure;
+    USART_InitTypeDef USART_InitStructure;
+
+
+    /* Configure USART1 Rx as input floating */
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
+    GPIO_Init(GPIOA, &GPIO_InitStructure); 
+    
+    /* Configure USART1 Tx as alternate function push-pull */
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+    GPIO_Init(GPIOA, &GPIO_InitStructure);
+
+    /* Disable the USART1 */
+    USART_Cmd(USART1, DISABLE);     
+
+    /* Disable USART1 Receive and Transmit interrupts */
+    USART_ITConfig(USART1, USART_IT_RXNE, DISABLE);
+    USART_ITConfig(USART1, USART_IT_TXE, DISABLE);    
+
+    /* Assign ISR handler */
+	BSP_IntVectSet(BSP_INT_ID_USART1, USART1_IRQHandler);
+
+    /* Assign ISR priority */
+    BSP_IntPrioSet(BSP_INT_ID_USART1, STM32_EncodePriority(USART1_PREEMPT_PRIO, USART1_SUB_PRIO));
+
+    /* Enable USART1 Interrupt */
+	BSP_IntEn(BSP_INT_ID_USART1);    
+
+    /* USART1 configured as follow:
+        - BaudRate = 9600 baud  
+        - Word Length = 8 Bits
+        - One Stop Bit
+        - No parity
+        - Hardware flow control disabled (RTS and CTS signals)
+        - Receive and transmit enabled
+    */
+    USART_StructInit(&USART_InitStructure);
+    
+    USART_InitStructure.USART_BaudRate = 9600;
+    USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+    USART_InitStructure.USART_StopBits = USART_StopBits_1;
+    USART_InitStructure.USART_Parity = USART_Parity_No;
+    USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+    USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;    
+    /* Configure USART1 */
+    USART_Init(USART1, &USART_InitStructure);   
+
+    /* Enable the USART1 */
+    USART_Cmd(USART1, ENABLE);  
+}
+
+void USART2_Init(void)
+{
+    GPIO_InitTypeDef GPIO_InitStructure;
+    USART_InitTypeDef USART_InitStructure;
+
+
+    /* Configure USART2 Rx as input floating */
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
+    GPIO_Init(GPIOA, &GPIO_InitStructure); 
+    
+    /* Configure USART2 Tx as alternate function push-pull */
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+    GPIO_Init(GPIOA, &GPIO_InitStructure);
+
+    /* Disable the USART2 */
+    USART_Cmd(USART2, DISABLE);     
+
+    /* Disable USART2 Receive and Transmit interrupts */
+    USART_ITConfig(USART2, USART_IT_RXNE, DISABLE);
+    USART_ITConfig(USART2, USART_IT_TXE, DISABLE);    
+
+    /* Assign ISR handler */
+	BSP_IntVectSet(BSP_INT_ID_USART2, USART2_IRQHandler);
+
+    /* Assign ISR priority */
+    BSP_IntPrioSet(BSP_INT_ID_USART2, STM32_EncodePriority(USART2_PREEMPT_PRIO, USART2_SUB_PRIO));
+
+    /* Enable USART2 Interrupt */
+	BSP_IntEn(BSP_INT_ID_USART2);    
+
+    /* USART2 configured as follow:
+        - BaudRate = 38400 baud  
+        - Word Length = 9 Bits
+        - One Stop Bit
+        - No parity
+        - Hardware flow control disabled (RTS and CTS signals)
+        - Receive and transmit enabled
+    */
+    USART_StructInit(&USART_InitStructure);
+    
+    USART_InitStructure.USART_BaudRate = 38400;
+    USART_InitStructure.USART_WordLength = USART_WordLength_9b;
+    USART_InitStructure.USART_StopBits = USART_StopBits_1;
+    USART_InitStructure.USART_Parity = USART_Parity_No;
+    USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+    USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;    
+    /* Configure USART2 */
+    USART_Init(USART2, &USART_InitStructure);   
+
+    /* Enable the USART2 */
+    USART_Cmd(USART2, ENABLE);  
+}
+
+void BEEP_Config(void)
+{
+    GPIO_InitTypeDef GPIO_InitStructure;
+      
+
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+    GPIO_Init(GPIOB, &GPIO_InitStructure);   
+}
+
+void RELAY_Config(void)
+{
+    GPIO_InitTypeDef GPIO_InitStructure;
+      
+
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
     GPIO_Init(GPIOB, &GPIO_InitStructure);   
 }
 
@@ -348,6 +487,14 @@ void BSP_Init(void)
     KEY_Init();
 
     RTC_Init();
+
+    USART1_Init();
+
+    USART2_Init();
+
+    BEEP_Init();
+
+    RELAY_Init();
 }
 
 /*

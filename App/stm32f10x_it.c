@@ -107,6 +107,26 @@ void EXTI9_5_IRQHandler(void)
     }
 }
 
+/**
+  * @brief  This function handles USART1 global interrupt request.
+  * @param  None
+  * @retval None
+  */
+void USART1_IRQHandler(void)
+{
+    UART_IRQProc(&g_uart_ccb[PC_COM_PORT], PC_UART);    
+}
+
+/**
+  * @brief  This function handles USART2 global interrupt request.
+  * @param  None
+  * @retval None
+  */
+void USART2_IRQHandler(void)
+{
+    UART_IRQProc(&g_uart_ccb[MEMS_COM_PORT], MEMS_UART);    
+}
+
 /******************************************************************************/
 /*                 STM32F10x Peripherals Interrupt Handlers                   */
 /*  Add here the Interrupt Handler for the used peripheral(s) (PPP), for the  */

@@ -26,9 +26,13 @@
 *********************************************************************************************************
 */
                                                     
-OS_STK                 App_TaskStartStk[APP_CFG_TASK_START_STK_SIZE];
-OS_STK                 App_TaskKeyStk[APP_CFG_TASK_KEY_STK_SIZE];
-OS_STK                 App_TaskTimeStk[APP_CFG_TASK_TIME_STK_SIZE];
+static  OS_STK         App_TaskStartStk[APP_CFG_TASK_START_STK_SIZE];
+static  OS_STK         App_TaskKeyStk[APP_CFG_TASK_KEY_STK_SIZE];
+static  OS_STK         App_TaskEndTickStk[APP_CFG_TASK_END_TICK_STK_SIZE];
+static  OS_STK         App_TaskEndProcStk[APP_CFG_TASK_END_PROC_STK_SIZE];
+static  OS_STK         App_TaskTimeStk[APP_CFG_TASK_TIME_STK_SIZE];
+static  OS_STK         App_TaskPCStk[APP_CFG_TASK_PC_STK_SIZE];
+static  OS_STK         App_TaskMEMSStk[APP_CFG_TASK_MEMS_STK_SIZE];
 
 /*
 *********************************************************************************************************
@@ -46,8 +50,8 @@ OS_STK                 App_TaskTimeStk[APP_CFG_TASK_TIME_STK_SIZE];
 static  void           App_TaskStart                (void *p_arg);
 
 static  void           App_MemAlloc                 (void);
-static  void           App_TaskCreate               (void);
 static  void           App_EventCreate              (void);
+static  void           App_TaskCreate               (void);
 
 /*
 *********************************************************************************************************
@@ -118,20 +122,26 @@ static  void  App_TaskStart (void *p_arg)
 
 #if (OS_TASK_STAT_EN > 0)
     OSStatInit();                                               /* Determine CPU capacity                                   */
-#endif   
+#endif
+
+    MEM_Init();
+
+    End_Init();
 
     GUI_Init(); 
 
-    MENU_Init();
-
     TIME_Init();
+
+    MENU_Init();
 
     App_EventCreate();                                          /* Create application events                                */
 
     App_TaskCreate();                                           /* Create application tasks                                 */
         
     while (DEF_TRUE) {                                          /* Task body, always written as an infinite loop            */
-        OSTimeDlyHMSM(0, 0, 0, 100);
+        beep();
+
+        OSTimeDlyHMSM(0, 0, 0, 50);
     }
 }
 
@@ -172,6 +182,9 @@ static  void  App_MemAlloc (void)
 static  void  App_EventCreate (void)
 {  
     g_key_para.sem = OSSemCreate(0);
+    g_sem_end = OSSemCreate(0);
+    g_sem_pc = OSSemCreate(0);
+    g_sem_mems = OSSemCreate(0);
 }
 
 /*
@@ -206,6 +219,30 @@ static  void  App_TaskCreate (void)
 
     OSTaskNameSet(APP_CFG_TASK_KEY_PRIO, "Key", &err);
 
+    OSTaskCreateExt((void (*)(void *)) App_TaskEndTick,
+                    (void           *) 0,
+                    (OS_STK         *)&App_TaskEndTickStk[APP_CFG_TASK_END_TICK_STK_SIZE - 1],
+                    (INT8U           ) APP_CFG_TASK_END_TICK_PRIO,
+                    (INT16U          ) APP_CFG_TASK_END_TICK_PRIO,
+                    (OS_STK         *)&App_TaskEndTickStk[0],
+                    (INT32U          ) APP_CFG_TASK_END_TICK_STK_SIZE,
+                    (void           *) 0,
+                    (INT16U          )(OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
+
+    OSTaskNameSet(APP_CFG_TASK_END_TICK_PRIO, "EndTick", &err);
+
+    OSTaskCreateExt((void (*)(void *)) App_TaskEndProc,
+                    (void           *) 0,
+                    (OS_STK         *)&App_TaskEndProcStk[APP_CFG_TASK_END_PROC_STK_SIZE - 1],
+                    (INT8U           ) APP_CFG_TASK_END_PROC_PRIO,
+                    (INT16U          ) APP_CFG_TASK_END_PROC_PRIO,
+                    (OS_STK         *)&App_TaskEndProcStk[0],
+                    (INT32U          ) APP_CFG_TASK_END_PROC_STK_SIZE,
+                    (void           *) 0,
+                    (INT16U          )(OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
+
+    OSTaskNameSet(APP_CFG_TASK_END_PROC_PRIO, "EndProc", &err);
+
     OSTaskCreateExt((void (*)(void *)) App_TaskTime,
                     (void           *) 0,
                     (OS_STK         *)&App_TaskTimeStk[APP_CFG_TASK_TIME_STK_SIZE - 1],
@@ -217,5 +254,29 @@ static  void  App_TaskCreate (void)
                     (INT16U          )(OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
 
     OSTaskNameSet(APP_CFG_TASK_TIME_PRIO, "Time", &err);    
+
+    OSTaskCreateExt((void (*)(void *)) App_TaskPC,
+                    (void           *) 0,
+                    (OS_STK         *)&App_TaskPCStk[APP_CFG_TASK_PC_STK_SIZE - 1],
+                    (INT8U           ) APP_CFG_TASK_PC_PRIO,
+                    (INT16U          ) APP_CFG_TASK_PC_PRIO,
+                    (OS_STK         *)&App_TaskPCStk[0],
+                    (INT32U          ) APP_CFG_TASK_PC_STK_SIZE,
+                    (void           *) 0,
+                    (INT16U          )(OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
+
+    OSTaskNameSet(APP_CFG_TASK_PC_PRIO, "PC", &err); 
+
+    OSTaskCreateExt((void (*)(void *)) App_TaskMEMS,
+                    (void           *) 0,
+                    (OS_STK         *)&App_TaskMEMSStk[APP_CFG_TASK_MEMS_STK_SIZE - 1],
+                    (INT8U           ) APP_CFG_TASK_MEMS_PRIO,
+                    (INT16U          ) APP_CFG_TASK_MEMS_PRIO,
+                    (OS_STK         *)&App_TaskMEMSStk[0],
+                    (INT32U          ) APP_CFG_TASK_MEMS_STK_SIZE,
+                    (void           *) 0,
+                    (INT16U          )(OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
+
+    OSTaskNameSet(APP_CFG_TASK_MEMS_PRIO, "MEMS", &err);    
 }
 
