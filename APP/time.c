@@ -56,6 +56,7 @@ void time_key_proc(int key_msg)
         break;
 
     default:
+        return;
         break;
     }
 
@@ -100,8 +101,6 @@ void  App_TaskTime (void *p_arg)
     while (DEF_TRUE) {  
         LED_RUN_TOGGLE();
 
-        menu_refresh();
-
         RTC_ReadTime(g_rtc_time);
 
         cur_sec = Bcd2Hex(g_rtc_time[SEC]);
@@ -133,8 +132,8 @@ void  App_TaskTime (void *p_arg)
                 }
             }
 
-            if((g_alarm_time.hour == g_time_count.hour) && 
-               (g_alarm_time.minute == g_time_count.minute))
+            if((g_time_count.hour == g_alarm_time.hour) && 
+               (g_time_count.minute >= g_alarm_time.minute))
             {
                 time_alarm_proc();
             }
@@ -143,6 +142,8 @@ void  App_TaskTime (void *p_arg)
         {
             last_sec = cur_sec;
         }
+
+        menu_refresh();
         
         OSTimeDlyHMSM(0, 0, 1, 0);
     }

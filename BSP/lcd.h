@@ -15,11 +15,11 @@
 #define LCD_CS_HIGH()           GPIO_SetBits(GPIOB, GPIO_Pin_12)
 #define LCD_CS_LOW()            GPIO_ResetBits(GPIOB, GPIO_Pin_12)
 
-#define LCD_RST_HIGH()          GPIO_SetBits(GPIOA, GPIO_Pin_11)
-#define LCD_RST_LOW()           GPIO_ResetBits(GPIOA, GPIO_Pin_11)
+#define LCD_RST_HIGH()          GPIO_SetBits(GPIOC, GPIO_Pin_7)
+#define LCD_RST_LOW()           GPIO_ResetBits(GPIOC, GPIO_Pin_7)
 
-#define LCD_RS_HIGH()           GPIO_SetBits(GPIOA, GPIO_Pin_8)
-#define LCD_RS_LOW()            GPIO_ResetBits(GPIOA, GPIO_Pin_8)
+#define LCD_RS_HIGH()           GPIO_SetBits(GPIOC, GPIO_Pin_6)
+#define LCD_RS_LOW()            GPIO_ResetBits(GPIOC, GPIO_Pin_6)
 
 #define LCD_BACKLIGHT_HIGH()    GPIO_SetBits(GPIOB, GPIO_Pin_11)
 #define LCD_BACKLIGHT_LOW()     GPIO_ResetBits(GPIOB, GPIO_Pin_11)

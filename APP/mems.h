@@ -12,8 +12,8 @@
 
 #define MEMS_FRAME_MAX_DATA_LEN               257u
 
-#define MEMS_FRAME_OK                          0u
-#define MEMS_FRAME_ERROR                     127u
+#define MEMS_FRAME_OK                           0u
+#define MEMS_FRAME_ERROR                      127u
 
 typedef struct
 {

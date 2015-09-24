@@ -2679,7 +2679,7 @@ GUI_FLASH const static GUI_CHARINFO GUI_FontHZ_16x16_CharInfo[132] = {
   { 8, 8, 1, (void GUI_FLASH *)&acFontHZ_002C }, /*12: ,*/
   { 8, 8, 1, (void GUI_FLASH *)&acFontHZ_002D }, /*13: -*/
   { 8, 8, 1, (void GUI_FLASH *)&acFontHZ_002E }, /*14: .*/
-  { 8, 8, 1, (void GUI_FLASH *)&acFontHZ_002F }, /*15: /*/
+  { 8, 8, 1, (void GUI_FLASH *)&acFontHZ_002F }, /*15: '/'*/
   { 8, 8, 1, (void GUI_FLASH *)&acFontHZ_0030 }, /*16: 0*/
   { 8, 8, 1, (void GUI_FLASH *)&acFontHZ_0031 }, /*17: 1*/
   { 8, 8, 1, (void GUI_FLASH *)&acFontHZ_0032 }, /*18: 2*/

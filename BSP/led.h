@@ -10,14 +10,14 @@
 #define LED_MEMS                    1u
 #define LED_UART                    2u
 
-#define LED_RUN_PORT                GPIOA
-#define LED_RUN_PIN                 GPIO_Pin_12
+#define LED_RUN_PORT                GPIOC
+#define LED_RUN_PIN                 GPIO_Pin_10
 
-#define LED_MEMS_PORT               GPIOB
-#define LED_MEMS_PIN                GPIO_Pin_4
+#define LED_MEMS_PORT               GPIOC
+#define LED_MEMS_PIN                GPIO_Pin_11
 
-#define LED_UART_PORT               GPIOB
-#define LED_UART_PIN                GPIO_Pin_5
+#define LED_UART_PORT               GPIOC
+#define LED_UART_PIN                GPIO_Pin_12
 
 #define LED_RUN_TOGGLE()            LED_Toggle(LED_RUN)
 

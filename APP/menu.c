@@ -252,12 +252,12 @@ static int form_sysinfo(unsigned int key_msg, unsigned int form_msg)
 
 static int form_set(unsigned int key_msg, unsigned int form_msg)
 {
-    static MENU_SET menu_set_sn;
-    static ALARM_TIME_SET alarm_time_set_sn;
+    static unsigned int menu_set_sn;
+    static unsigned int alarm_time_set_sn;
     static ALARM_TIME alarm_time;
-    static TARGET_FLOW_SET target_flow_set_sn;
+    static unsigned int target_flow_set_sn;
     static FLOW_PARA target_flow;
-    static RTC_TIME_SET rtc_time_set_sn;
+    static unsigned int rtc_time_set_sn;
     static INT8U rtc_time[MAX_RTC_TIME_ITEM];
     INT8U temp;
     char disp_buf[18];
@@ -528,6 +528,7 @@ static int form_set(unsigned int key_msg, unsigned int form_msg)
                 switch(alarm_time_set_sn)
                 {
                 case ALARM_TIME_SET_CONFIRM:
+                    memset(&g_time_count, 0, sizeof(TIME_COUNT));
                     memcpy(&g_alarm_time, &alarm_time, sizeof(ALARM_TIME));
                     break;
 
