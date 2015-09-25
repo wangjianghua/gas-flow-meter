@@ -23,7 +23,6 @@
 #include "queue.h"
 #include "link_manager.h"
 #include "uart_link.h"
-#include "memory.h"
 #include "led.h"
 #include "key.h"
 #include "lcd.h"
@@ -36,6 +35,7 @@
 #include "time.h"
 #include "mems.h"
 #include "pc.h"
+#include "memory.h"
 
 
 #endif

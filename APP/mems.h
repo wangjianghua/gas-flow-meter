@@ -10,6 +10,17 @@
 
 #define MEMS_READ_INSTANT_FLOW_CMD            0xF0
 
+#define MEMS_CAL_GRP_1                          0u
+#define MEMS_CAL_GRP_2                          1u
+#define MEMS_CAL_GRP_3                          2u
+#define MEMS_CAL_GRP_4                          3u
+#define MEMS_CAL_GRP_5                          4u
+#define MAX_MEMS_CAL_GRPS                       5u
+
+#define MEMS_CAL_ELEM_LOCAL                     0u
+#define MEMS_CAL_ELEM_REMOTE                    1u
+#define MAX_MEMS_CAL_ELEMS                      2u
+
 #define MEMS_FRAME_MAX_DATA_LEN               257u
 
 #define MEMS_FRAME_OK                           0u
@@ -49,6 +60,8 @@ typedef struct
     INT32U disp_flow;
     INT16U disp_flow_int_part;
     INT16U disp_flow_dec_part;
+
+    INT32U average_flow;
 } MEMS_PARA, *P_MEMS_PARA;
 
 extern OS_EVENT *g_sem_mems;

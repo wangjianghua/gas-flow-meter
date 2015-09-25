@@ -7,8 +7,6 @@ MEM_PARA g_mem_para =
     0,
     MEM_PARA_DATE,
 
-    PLC_GROUP_DEFAULT,
-
     {
         0,
     }
@@ -19,8 +17,6 @@ const MEM_PARA g_mem_para_default =
     MEM_PARA_TAG,
     0,
     MEM_PARA_DATE,
-
-    PLC_GROUP_DEFAULT,
 
     {
         0,
@@ -226,6 +222,13 @@ void mem_para_read(void)
             }
         }
     }
+
+    mem_para_write();
+}
+
+void mem_para_restore(void)
+{
+    memcpy(&g_mem_para, &g_mem_para_default, sizeof(MEM_PARA));
 
     mem_para_write();
 }

@@ -6,8 +6,10 @@
 #endif
 
 
-extern const char SOFTWARE_VERSION[];
+#define VERSION_LEN                 5u
+
 extern const char HARDWARE_VERSION[];
+extern const char SOFTWARE_VERSION[];
 
 unsigned char Bcd2Hex(unsigned char bcd);
 unsigned char Hex2Bcd(unsigned char hex);

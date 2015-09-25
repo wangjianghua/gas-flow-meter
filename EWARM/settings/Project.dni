@@ -1,5 +1,5 @@
 [DebugChecksum]
-Checksum=1304402906
+Checksum=-966737455
 [Stack]
 FillEnabled=0
 OverflowWarningsEnabled=1
@@ -34,6 +34,10 @@ ITMportsEnable=0
 ITMportsTermIO=0
 ITMportsLogFile=0
 ITMlogFile=$PROJ_DIR$\ITM.log
+[struct_types]
+Fmt0=MEM_PARA-crc	4	0
+Fmt1=MEM_PARA-date	4	0
+Fmt2=MEM_PARA-tag	4	0
 [watch_formats]
 Fmt0={W}42:cur_sec	3	0
 [PowerLog]

@@ -228,21 +228,21 @@ static int form_sysinfo(unsigned int key_msg, unsigned int form_msg)
     sprintf(disp_buf, "%s", week_str[g_rtc_time[WEEK] % MAX_WEEK_ITEM]);
     GUI_DispStringAt(disp_buf, 0, 0);
 
-    sprintf(disp_buf, "Èí¼þ:%02x%02x%02x%02x-%02x",  
-                      SOFTWARE_VERSION[0],
-                      SOFTWARE_VERSION[1],
-                      SOFTWARE_VERSION[2],
-                      SOFTWARE_VERSION[3],
-                      SOFTWARE_VERSION[4]);
-    GUI_DispStringAt(disp_buf, 0, 16); 
-
     sprintf(disp_buf, "Ó²¼þ:%02x%02x%02x%02x-%02x",  
                       HARDWARE_VERSION[0],
                       HARDWARE_VERSION[1],
                       HARDWARE_VERSION[2],
                       HARDWARE_VERSION[3],
                       HARDWARE_VERSION[4]);
-    GUI_DispStringAt(disp_buf, 0, 32);    
+    GUI_DispStringAt(disp_buf, 0, 16);    
+
+    sprintf(disp_buf, "Èí¼þ:%02x%02x%02x%02x-%02x",  
+                      SOFTWARE_VERSION[0],
+                      SOFTWARE_VERSION[1],
+                      SOFTWARE_VERSION[2],
+                      SOFTWARE_VERSION[3],
+                      SOFTWARE_VERSION[4]);
+    GUI_DispStringAt(disp_buf, 0, 32);
 
     sprintf(disp_buf, "   20%02x-%02x-%02x   ", g_rtc_time[YEAR], g_rtc_time[MONTH], g_rtc_time[DATE]);
     GUI_DispStringAt(disp_buf, 0, 48);
