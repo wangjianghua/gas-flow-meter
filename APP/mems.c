@@ -184,6 +184,8 @@ void  App_TaskMEMS (void *p_arg)
     (void)p_arg;
     
     while (DEF_TRUE) {
+        OSTimeDlyHMSM(0, 0, 0, 50);
+        
         while(OSSemAccept(g_sem_mems));
         
         mems_read_instant_flow();
@@ -229,7 +231,7 @@ void  App_TaskMEMS (void *p_arg)
                             if(g_mems_para.inside_count >= 2)
                             {
                                 g_mems_para.inside_count = 0;
-                                g_mems_para.outside_count = 5;
+                                g_mems_para.outside_count = 1;
 
                                 g_mems_para.disp_flow = g_mems_para.target_flow;
                                 g_mems_para.disp_flow_int_part = g_mems_para.disp_flow / 1000;

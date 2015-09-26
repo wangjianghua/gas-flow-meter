@@ -21,12 +21,12 @@
 #define MEMS_CAL_ELEM_REMOTE                    1u
 #define MAX_MEMS_CAL_ELEMS                      2u
 
-#define MEMS_DEBOUNCE_THRESHOLD_DEFAULT       200u
+#define MEMS_DEBOUNCE_THRESHOLD_DEFAULT       300u
 
 #define MEMS_CAL_INCOMPLETE                  FALSE
 #define MEMS_CAL_COMPLETE                     TRUE
 
-#define MAX_FLOW_NUM                           25u
+#define MAX_FLOW_NUM                           10u
 
 #define MEMS_FRAME_MAX_DATA_LEN               257u
 
