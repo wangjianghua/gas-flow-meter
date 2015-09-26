@@ -320,7 +320,7 @@ void         BSP_PeriphDis               (CPU_DATA       pwr_clk_id);
 #define DEBUG_PRINT(s)             
 #endif
 
-#define WDT_EN                       0u
+#define WDT_EN                       1u
 
 #if (WDT_EN > 0u)
 #define clr_wdt()         { IWDG_ReloadCounter(); }
@@ -353,4 +353,4 @@ void RELAY_Config(void);
 *********************************************************************************************************
 */
 
-#endif                                                          /* End of module include.                               */
+#endif

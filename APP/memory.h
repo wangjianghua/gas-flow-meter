@@ -6,9 +6,10 @@
 #endif
 
 
-#define MEM_PARA_DATE                   0x20150925
+#define MEM_PARA_DATE                   0x20150926
 
 #define MEM_PARA_TAG                    0x19890924
+#define MEM_PARA_CRC                    0x00000000
 #define MAX_PARA_NUM                    32u //32 * 4B = 128B
 #define MEM_PARA_SIZE                  (sizeof(MEM_PARA)) //128B
 
@@ -31,12 +32,11 @@ typedef struct
     unsigned int date; //ÈÕÆÚ
 
     unsigned int mems_debounce_threshold;
-    unsigned int mems_debounce_times;
 
-    unsigned int mems_cal_complete;
-    unsigned int mems_cal_grps[MAX_MEMS_CAL_GRPS][MAX_MEMS_CAL_ELEMS];
+    unsigned int mems_cal_state;
+    unsigned int mems_cal[MAX_MEMS_CAL_GRPS][MAX_MEMS_CAL_ELEMS];
 
-    unsigned int para_reserve[MAX_PARA_NUM - 16];
+    unsigned int para_reserve[MAX_PARA_NUM - 15];
 } MEM_PARA, *P_MEM_PARA;
 
 extern MEM_PARA g_mem_para;

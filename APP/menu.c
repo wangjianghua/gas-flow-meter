@@ -256,7 +256,6 @@ static int form_set(unsigned int key_msg, unsigned int form_msg)
     static unsigned int alarm_time_set_sn;
     static ALARM_TIME alarm_time;
     static unsigned int target_flow_set_sn;
-    static FLOW_PARA target_flow;
     static unsigned int rtc_time_set_sn;
     static INT8U rtc_time[MAX_RTC_TIME_ITEM];
     INT8U temp;
@@ -324,24 +323,24 @@ static int form_set(unsigned int key_msg, unsigned int form_msg)
                 switch(target_flow_set_sn)
                 {
                 case TARGET_FLOW_SET_INT_PART:
-                    if(target_flow.int_part)
+                    if(g_mems_para.target_flow_int_part)
                     {
-                        target_flow.int_part--;
+                        g_mems_para.target_flow_int_part--;
                     }
                     else
                     {
-                        target_flow.int_part = MAX_MEMS_FLOW - 1;
+                        g_mems_para.target_flow_int_part = MAX_MEMS_FLOW - 1;
                     }
                     break;
 
                 case TARGET_FLOW_SET_DEC_PART:
-                    if(target_flow.dec_part)
+                    if(g_mems_para.target_flow_dec_part)
                     {
-                        target_flow.dec_part--;
+                        g_mems_para.target_flow_dec_part--;
                     }
                     else
                     {
-                        target_flow.dec_part = 9;
+                        g_mems_para.target_flow_dec_part = 9;
                     }                   
                     break;
 
@@ -445,20 +444,20 @@ static int form_set(unsigned int key_msg, unsigned int form_msg)
                 switch(target_flow_set_sn)
                 {
                 case TARGET_FLOW_SET_INT_PART:
-                    target_flow.int_part++;
+                    g_mems_para.target_flow_int_part++;
 
-                    if(target_flow.int_part > (MAX_MEMS_FLOW - 1))
+                    if(g_mems_para.target_flow_int_part > (MAX_MEMS_FLOW - 1))
                     {
-                        target_flow.int_part = 0;
+                        g_mems_para.target_flow_int_part = 0;
                     }
                     break;
 
                 case TARGET_FLOW_SET_DEC_PART:
-                    target_flow.dec_part++;
+                    g_mems_para.target_flow_dec_part++;
 
-                    if(target_flow.dec_part > 9)
+                    if(g_mems_para.target_flow_dec_part > 9)
                     {
-                        target_flow.dec_part = 0;
+                        g_mems_para.target_flow_dec_part = 0;
                     }                    
                     break;
 
@@ -546,15 +545,15 @@ static int form_set(unsigned int key_msg, unsigned int form_msg)
 
                 target_flow_set_sn = TARGET_FLOW_SET_INT_PART;
 
-                target_flow.int_part = g_mems_para.target / 1000;
-                target_flow.dec_part = g_mems_para.target / 100;
+                g_mems_para.target_flow_int_part = g_mems_para.target_flow / 1000;
+                g_mems_para.target_flow_dec_part = (g_mems_para.target_flow - (g_mems_para.target_flow_int_part * 1000)) / 100;
             }
             else if(MENU_SET_TARGET_FLOW == menu_set_sn)
             {
                 switch(target_flow_set_sn)
                 {
                 case TARGET_FLOW_SET_CONFIRM:
-                    g_mems_para.target = target_flow.int_part * 1000 + target_flow.dec_part * 100;
+                    g_mems_para.target_flow = g_mems_para.target_flow_int_part * 1000 + g_mems_para.target_flow_dec_part * 100;
                     break;
 
                 case TARGET_FLOW_SET_QUIT:
@@ -655,7 +654,7 @@ static int form_set(unsigned int key_msg, unsigned int form_msg)
     case MENU_SET_TARGET_FLOW:
         sprintf(disp_buf, "目标流量:       ");
         GUI_DispStringAt(disp_buf, 0, 16);    
-        sprintf(disp_buf, "   %02d.%02d SLPM   ", target_flow.int_part, target_flow.dec_part * 10);
+        sprintf(disp_buf, "   %02d.%02d SLPM   ", g_mems_para.target_flow_int_part, g_mems_para.target_flow_dec_part * 10);
         GUI_DispStringAt(disp_buf, 0, 32);    
         sprintf(disp_buf, "   确认  退出   ");
         GUI_DispStringAt(disp_buf, 0, 48);   
@@ -663,12 +662,12 @@ static int form_set(unsigned int key_msg, unsigned int form_msg)
         switch(target_flow_set_sn)
         {
         case TARGET_FLOW_SET_INT_PART:
-            sprintf(disp_buf, "%02d", target_flow.int_part);
+            sprintf(disp_buf, "%02d", g_mems_para.target_flow_int_part);
             GUI_DispRevStringAt(disp_buf, 24, 32);            
             break;
             
         case TARGET_FLOW_SET_DEC_PART:
-            sprintf(disp_buf, "%02d", target_flow.dec_part * 10);
+            sprintf(disp_buf, "%02d", g_mems_para.target_flow_dec_part * 10);
             GUI_DispRevStringAt(disp_buf, 48, 32);            
             break;
 

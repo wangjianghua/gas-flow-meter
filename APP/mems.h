@@ -21,6 +21,13 @@
 #define MEMS_CAL_ELEM_REMOTE                    1u
 #define MAX_MEMS_CAL_ELEMS                      2u
 
+#define MEMS_DEBOUNCE_THRESHOLD_DEFAULT       200u
+
+#define MEMS_CAL_INCOMPLETE                  FALSE
+#define MEMS_CAL_COMPLETE                     TRUE
+
+#define MAX_FLOW_NUM                           25u
+
 #define MEMS_FRAME_MAX_DATA_LEN               257u
 
 #define MEMS_FRAME_OK                           0u
@@ -45,23 +52,26 @@ typedef struct
 
 typedef struct 
 {
-    INT16U int_part;
-    INT16U dec_part;
-} FLOW_PARA, *P_FLOW_PARA;
-
-typedef struct 
-{
-    INT32U target;
-    INT16U target_int_part;
-    INT16U target_dec_part;
+    INT32U target_flow;
+    INT16U target_flow_int_part;
+    INT16U target_flow_dec_part;
     
     INT32U instant_flow;
+
+    INT32U buf[MAX_FLOW_NUM];
+    INT16U index;
+
+    INT32U sum;
+
+    INT32U average_flow;
+    INT32U cal_flow;
+
+    INT16U inside_count;
+    INT16U outside_count;
     
     INT32U disp_flow;
     INT16U disp_flow_int_part;
     INT16U disp_flow_dec_part;
-
-    INT32U average_flow;
 } MEMS_PARA, *P_MEMS_PARA;
 
 extern OS_EVENT *g_sem_mems;

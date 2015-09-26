@@ -4,8 +4,11 @@
 MEM_PARA g_mem_para = 
 {
     MEM_PARA_TAG,
-    0,
+    MEM_PARA_CRC,
     MEM_PARA_DATE,
+
+    MEMS_DEBOUNCE_THRESHOLD_DEFAULT,
+    MEMS_CAL_INCOMPLETE,
 
     {
         0,
@@ -15,8 +18,11 @@ MEM_PARA g_mem_para =
 const MEM_PARA g_mem_para_default = 
 {
     MEM_PARA_TAG,
-    0,
+    MEM_PARA_CRC,
     MEM_PARA_DATE,
+
+    MEMS_DEBOUNCE_THRESHOLD_DEFAULT,
+    MEMS_CAL_INCOMPLETE,
 
     {
         0,

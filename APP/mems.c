@@ -178,11 +178,12 @@ void mems_read_instant_flow(void)
 void  App_TaskMEMS (void *p_arg)
 {
     INT8U err, FRH, FRM, FRL;
+    INT16U i;
     
 
     (void)p_arg;
     
-    while (DEF_TRUE) {        
+    while (DEF_TRUE) {
         while(OSSemAccept(g_sem_mems));
         
         mems_read_instant_flow();
@@ -203,11 +204,56 @@ void  App_TaskMEMS (void *p_arg)
                     FRL = mems_frame_recv.data[2];
 
                     g_mems_para.instant_flow = (INT32U)FRH * 65536 + (INT32U)FRM * 256 + (INT32U)FRL;
-                    
-                    g_mems_para.disp_flow = g_mems_para.instant_flow + 50;          
 
-                    g_mems_para.disp_flow_int_part = g_mems_para.disp_flow / 1000;
-                    g_mems_para.disp_flow_dec_part = (g_mems_para.disp_flow - (g_mems_para.disp_flow_int_part * 1000)) / 100;                    
+                    g_mems_para.buf[g_mems_para.index++] = g_mems_para.instant_flow;
+
+                    if(MAX_FLOW_NUM == g_mems_para.index)
+                    {
+                        g_mems_para.index = 0;
+                        
+                        g_mems_para.sum = 0;
+
+                        for(i = 0; i < MAX_FLOW_NUM; i++)
+                        {
+                            g_mems_para.sum += g_mems_para.buf[i];
+                        }
+
+                        g_mems_para.average_flow = g_mems_para.sum / MAX_FLOW_NUM;
+
+                        g_mems_para.cal_flow = g_mems_para.average_flow; //流量校准
+                        
+                        if((0 != g_mems_para.cal_flow) && (abs((int)g_mems_para.cal_flow - (int)g_mems_para.target_flow) < g_mem_para.mems_debounce_threshold))
+                        {
+                            g_mems_para.inside_count++;
+
+                            if(g_mems_para.inside_count >= 2)
+                            {
+                                g_mems_para.inside_count = 0;
+                                g_mems_para.outside_count = 5;
+
+                                g_mems_para.disp_flow = g_mems_para.target_flow;
+                                g_mems_para.disp_flow_int_part = g_mems_para.disp_flow / 1000;
+                                g_mems_para.disp_flow_dec_part = (g_mems_para.disp_flow - (g_mems_para.disp_flow_int_part * 1000)) / 100;                                    
+                            }
+
+                            break;
+                        }       
+                        else
+                        {
+                            g_mems_para.inside_count = 0;
+                        }
+
+                        if(g_mems_para.outside_count)
+                        {
+                            g_mems_para.outside_count--;
+                        }
+                        else
+                        {
+                            g_mems_para.disp_flow = g_mems_para.cal_flow + 50;
+                            g_mems_para.disp_flow_int_part = g_mems_para.disp_flow / 1000;
+                            g_mems_para.disp_flow_dec_part = (g_mems_para.disp_flow - (g_mems_para.disp_flow_int_part * 1000)) / 100;
+                        }
+                    }
                     break;
 
                 default:

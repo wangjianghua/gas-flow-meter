@@ -171,10 +171,10 @@ void  App_TaskPC (void *p_arg)
                         break;
 
                     case PC_READ_MEMS_CAL_CMD:
-                        memcpy(&buf[0], &g_mem_para.mems_cal_complete, sizeof(g_mem_para.mems_cal_complete));
-                        memcpy(&buf[SINGLE_PARA_SIZE], g_mem_para.mems_cal_grps, sizeof(g_mem_para.mems_cal_grps));
+                        memcpy(&buf[0], &g_mem_para.mems_cal_state, sizeof(g_mem_para.mems_cal_state));
+                        memcpy(&buf[SINGLE_PARA_SIZE], g_mem_para.mems_cal, sizeof(g_mem_para.mems_cal));
 
-                        len = sizeof(g_mem_para.mems_cal_complete) + sizeof(g_mem_para.mems_cal_grps);
+                        len = sizeof(g_mem_para.mems_cal_state) + sizeof(g_mem_para.mems_cal);
                         
                         memcpy(&pc_frame_send.Data[DL645_07_DATA_ITEM_LEN], buf, len);
                         
@@ -190,8 +190,8 @@ void  App_TaskPC (void *p_arg)
                         break;
 
                     case PC_WRITE_MEMS_CAL_GRP1_CMD:
-                        g_mem_para.mems_cal_grps[MEMS_CAL_GRP_1][MEMS_CAL_ELEM_LOCAL] = g_mems_para.average_flow;
-                        memcpy(&g_mem_para.mems_cal_grps[MEMS_CAL_GRP_1][MEMS_CAL_ELEM_REMOTE], &pc_frame_recv.Data[12], SINGLE_PARA_SIZE);
+                        g_mem_para.mems_cal[MEMS_CAL_GRP_1][MEMS_CAL_ELEM_LOCAL] = g_mems_para.average_flow;
+                        memcpy(&g_mem_para.mems_cal[MEMS_CAL_GRP_1][MEMS_CAL_ELEM_REMOTE], &pc_frame_recv.Data[12], SINGLE_PARA_SIZE);
 
                         mem_para_write();
                             
@@ -207,8 +207,8 @@ void  App_TaskPC (void *p_arg)
                         break;
 
                     case PC_WRITE_MEMS_CAL_GRP2_CMD:
-                        g_mem_para.mems_cal_grps[MEMS_CAL_GRP_2][MEMS_CAL_ELEM_LOCAL] = g_mems_para.average_flow;
-                        memcpy(&g_mem_para.mems_cal_grps[MEMS_CAL_GRP_2][MEMS_CAL_ELEM_REMOTE], &pc_frame_recv.Data[12], SINGLE_PARA_SIZE);
+                        g_mem_para.mems_cal[MEMS_CAL_GRP_2][MEMS_CAL_ELEM_LOCAL] = g_mems_para.average_flow;
+                        memcpy(&g_mem_para.mems_cal[MEMS_CAL_GRP_2][MEMS_CAL_ELEM_REMOTE], &pc_frame_recv.Data[12], SINGLE_PARA_SIZE);
 
                         mem_para_write();
             
@@ -224,8 +224,8 @@ void  App_TaskPC (void *p_arg)
                         break;
 
                     case PC_WRITE_MEMS_CAL_GRP3_CMD:
-                        g_mem_para.mems_cal_grps[MEMS_CAL_GRP_3][MEMS_CAL_ELEM_LOCAL] = g_mems_para.average_flow;
-                        memcpy(&g_mem_para.mems_cal_grps[MEMS_CAL_GRP_3][MEMS_CAL_ELEM_REMOTE], &pc_frame_recv.Data[12], SINGLE_PARA_SIZE);
+                        g_mem_para.mems_cal[MEMS_CAL_GRP_3][MEMS_CAL_ELEM_LOCAL] = g_mems_para.average_flow;
+                        memcpy(&g_mem_para.mems_cal[MEMS_CAL_GRP_3][MEMS_CAL_ELEM_REMOTE], &pc_frame_recv.Data[12], SINGLE_PARA_SIZE);
 
                         mem_para_write();
                             
@@ -241,8 +241,8 @@ void  App_TaskPC (void *p_arg)
                         break;
 
                     case PC_WRITE_MEMS_CAL_GRP4_CMD:
-                        g_mem_para.mems_cal_grps[MEMS_CAL_GRP_4][MEMS_CAL_ELEM_LOCAL] = g_mems_para.average_flow;
-                        memcpy(&g_mem_para.mems_cal_grps[MEMS_CAL_GRP_4][MEMS_CAL_ELEM_REMOTE], &pc_frame_recv.Data[12], SINGLE_PARA_SIZE);
+                        g_mem_para.mems_cal[MEMS_CAL_GRP_4][MEMS_CAL_ELEM_LOCAL] = g_mems_para.average_flow;
+                        memcpy(&g_mem_para.mems_cal[MEMS_CAL_GRP_4][MEMS_CAL_ELEM_REMOTE], &pc_frame_recv.Data[12], SINGLE_PARA_SIZE);
 
                         mem_para_write();
                             
@@ -258,8 +258,8 @@ void  App_TaskPC (void *p_arg)
                         break;
 
                     case PC_WRITE_MEMS_CAL_GRP5_CMD:
-                        g_mem_para.mems_cal_grps[MEMS_CAL_GRP_5][MEMS_CAL_ELEM_LOCAL] = g_mems_para.average_flow;
-                        memcpy(&g_mem_para.mems_cal_grps[MEMS_CAL_GRP_5][MEMS_CAL_ELEM_REMOTE], &pc_frame_recv.Data[12], SINGLE_PARA_SIZE);
+                        g_mem_para.mems_cal[MEMS_CAL_GRP_5][MEMS_CAL_ELEM_LOCAL] = g_mems_para.average_flow;
+                        memcpy(&g_mem_para.mems_cal[MEMS_CAL_GRP_5][MEMS_CAL_ELEM_REMOTE], &pc_frame_recv.Data[12], SINGLE_PARA_SIZE);
 
                         mem_para_write();
                             
@@ -275,7 +275,7 @@ void  App_TaskPC (void *p_arg)
                         break;
 
                     case PC_MEMS_CAL_CONFIRM_CMD:
-                        memcpy(&pc_frame_send.Data[DL645_07_DATA_ITEM_LEN], &g_mem_para.mems_cal_complete, SINGLE_PARA_SIZE);
+                        memcpy(&pc_frame_send.Data[DL645_07_DATA_ITEM_LEN], &g_mem_para.mems_cal_state, SINGLE_PARA_SIZE);
                         
                         pc_frame_send.Len = DL645_07_DATA_ITEM_LEN + SINGLE_PARA_SIZE;
                         
@@ -289,14 +289,9 @@ void  App_TaskPC (void *p_arg)
                         break;
 
                     case PC_READ_MEMS_DEBOUNCE_CMD:
-                        memcpy(&buf[0], &g_mem_para.mems_debounce_threshold, sizeof(g_mem_para.mems_debounce_threshold));
-                        memcpy(&buf[SINGLE_PARA_SIZE], &g_mem_para.mems_debounce_times, sizeof(g_mem_para.mems_debounce_times));
-
-                        len = sizeof(g_mem_para.mems_debounce_threshold) + sizeof(g_mem_para.mems_debounce_times);
-                        
-                        memcpy(&pc_frame_send.Data[DL645_07_DATA_ITEM_LEN], buf, len);
+                        memcpy(&pc_frame_send.Data[DL645_07_DATA_ITEM_LEN], &g_mem_para.mems_debounce_threshold, SINGLE_PARA_SIZE);
                                                
-                        pc_frame_send.Len = DL645_07_DATA_ITEM_LEN + len;
+                        pc_frame_send.Len = DL645_07_DATA_ITEM_LEN + SINGLE_PARA_SIZE;
                         
                         pc_frame_send.Ctrl = 0x91;
                         
@@ -309,22 +304,6 @@ void  App_TaskPC (void *p_arg)
 
                     case PC_WRITE_MEMS_DEBOUNCE_THRESHOLD_CMD:
                         memcpy(&g_mem_para.mems_debounce_threshold, &pc_frame_recv.Data[12], SINGLE_PARA_SIZE);
-
-                        mem_para_write();
-                            
-                        pc_frame_send.Len = 0;
-                        
-                        pc_frame_send.Ctrl = 0x94;
-                        
-                        send_len = Create_DL645_Frame((INT8U *)addr, pc_frame_send.Ctrl, pc_frame_send.Len, &pc_frame_send);
-                                                
-                        while(OSSemAccept(g_sem_pc));
-                        
-                        pc_uart_send((INT8U *)&pc_frame_send, send_len);                        
-                        break;
-
-                    case PC_WRITE_MEMS_DEBOUNCE_TIMES_CMD:
-                        memcpy(&g_mem_para.mems_debounce_times, &pc_frame_recv.Data[12], SINGLE_PARA_SIZE);
 
                         mem_para_write();
                             
