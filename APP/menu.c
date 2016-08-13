@@ -255,7 +255,6 @@ static int form_set(unsigned int key_msg, unsigned int form_msg)
     static unsigned int menu_set_sn;
     static unsigned int alarm_time_set_sn;
     static ALARM_TIME alarm_time;
-    static unsigned int target_flow_set_sn;
     static unsigned int rtc_time_set_sn;
     static INT8U rtc_time[MAX_RTC_TIME_ITEM];
     INT8U temp;
@@ -276,10 +275,6 @@ static int form_set(unsigned int key_msg, unsigned int form_msg)
             if(MENU_SET_ALARM_TIME == menu_set_sn)
             {
                 alarm_time_set_sn = (alarm_time_set_sn + 1) % ALARM_TIME_SET_MAX;
-            }
-            else if(MENU_SET_TARGET_FLOW == menu_set_sn)
-            {
-                target_flow_set_sn = (target_flow_set_sn + 1) % TARGET_FLOW_SET_MAX;
             }
             else if(MENU_SET_RTC_TIME == menu_set_sn)
             {
@@ -313,36 +308,6 @@ static int form_set(unsigned int key_msg, unsigned int form_msg)
                         alarm_time.minute = 59;
                     }
                     break;  
-
-                default:
-                    break;
-                }
-            }
-            else if(MENU_SET_TARGET_FLOW == menu_set_sn)
-            {
-                switch(target_flow_set_sn)
-                {
-                case TARGET_FLOW_SET_INT_PART:
-                    if(g_mems_para.target_flow_int_part)
-                    {
-                        g_mems_para.target_flow_int_part--;
-                    }
-                    else
-                    {
-                        g_mems_para.target_flow_int_part = MAX_MEMS_FLOW - 1;
-                    }
-                    break;
-
-                case TARGET_FLOW_SET_DEC_PART:
-                    if(g_mems_para.target_flow_dec_part)
-                    {
-                        g_mems_para.target_flow_dec_part--;
-                    }
-                    else
-                    {
-                        g_mems_para.target_flow_dec_part = 9;
-                    }                   
-                    break;
 
                 default:
                     break;
@@ -439,32 +404,6 @@ static int form_set(unsigned int key_msg, unsigned int form_msg)
                     break;
                 }
             } 
-            else if(MENU_SET_TARGET_FLOW == menu_set_sn)
-            {
-                switch(target_flow_set_sn)
-                {
-                case TARGET_FLOW_SET_INT_PART:
-                    g_mems_para.target_flow_int_part++;
-
-                    if(g_mems_para.target_flow_int_part > (MAX_MEMS_FLOW - 1))
-                    {
-                        g_mems_para.target_flow_int_part = 0;
-                    }
-                    break;
-
-                case TARGET_FLOW_SET_DEC_PART:
-                    g_mems_para.target_flow_dec_part++;
-
-                    if(g_mems_para.target_flow_dec_part > 9)
-                    {
-                        g_mems_para.target_flow_dec_part = 0;
-                    }                    
-                    break;
-
-                default:
-                    break;
-                }
-            }
             else if(MENU_SET_RTC_TIME == menu_set_sn)
             {
                 switch(rtc_time_set_sn)
@@ -541,35 +480,10 @@ static int form_set(unsigned int key_msg, unsigned int form_msg)
                     break;
                 }
 
-                menu_set_sn = MENU_SET_TARGET_FLOW;
-
-                target_flow_set_sn = TARGET_FLOW_SET_INT_PART;
-
-                g_mems_para.target_flow_int_part = g_mems_para.target_flow / 1000;
-                g_mems_para.target_flow_dec_part = (g_mems_para.target_flow - (g_mems_para.target_flow_int_part * 1000)) / 100;
-            }
-            else if(MENU_SET_TARGET_FLOW == menu_set_sn)
-            {
-                switch(target_flow_set_sn)
-                {
-                case TARGET_FLOW_SET_CONFIRM:
-                    g_mems_para.target_flow = g_mems_para.target_flow_int_part * 1000 + g_mems_para.target_flow_dec_part * 100;
-                    break;
-
-                case TARGET_FLOW_SET_QUIT:
-                    form_id = FORM_ID_HOME;
-                    
-                    return (FORM_MSG_DATA);                    
-                    break;
-
-                default:
-                    break;
-                }
-                
                 menu_set_sn = MENU_SET_RTC_TIME;
-
+                
                 RTC_ReadTime(rtc_time);
-
+                
                 rtc_time_set_sn = RTC_TIME_SET_YEAR;
             }
             else if(MENU_SET_RTC_TIME == menu_set_sn)
@@ -649,41 +563,6 @@ static int form_set(unsigned int key_msg, unsigned int form_msg)
         default:
             break;
         }
-        break;
-
-    case MENU_SET_TARGET_FLOW:
-        sprintf(disp_buf, "目标流量:       ");
-        GUI_DispStringAt(disp_buf, 0, 16);    
-        sprintf(disp_buf, "   %02d.%02d SLPM   ", g_mems_para.target_flow_int_part, g_mems_para.target_flow_dec_part * 10);
-        GUI_DispStringAt(disp_buf, 0, 32);    
-        sprintf(disp_buf, "   确认  退出   ");
-        GUI_DispStringAt(disp_buf, 0, 48);   
-
-        switch(target_flow_set_sn)
-        {
-        case TARGET_FLOW_SET_INT_PART:
-            sprintf(disp_buf, "%02d", g_mems_para.target_flow_int_part);
-            GUI_DispRevStringAt(disp_buf, 24, 32);            
-            break;
-            
-        case TARGET_FLOW_SET_DEC_PART:
-            sprintf(disp_buf, "%02d", g_mems_para.target_flow_dec_part * 10);
-            GUI_DispRevStringAt(disp_buf, 48, 32);            
-            break;
-
-        case TARGET_FLOW_SET_CONFIRM:
-            sprintf(disp_buf, "确认"); 
-            GUI_DispRevStringAt(disp_buf, 24, 48);            
-            break;
-
-        case TARGET_FLOW_SET_QUIT:
-            sprintf(disp_buf, "退出"); 
-            GUI_DispRevStringAt(disp_buf, 72, 48);            
-            break;
-
-        default:
-            break;
-        }        
         break;
 
     case MENU_SET_RTC_TIME:

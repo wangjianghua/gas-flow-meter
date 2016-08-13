@@ -160,6 +160,37 @@ void mems_read_instant_flow(void)
     mems_uart_send((INT8U *)&mems_frame_send, send_len);
 }
 
+BOOLEAN mems_flow_cal(INT32U standard_flow)
+{
+    BOOLEAN ret;
+    FP32 err;
+
+
+    if(0 != g_mems_para.measure_flow)
+    {
+        err = (standard_flow - g_mems_para.measure_flow) / g_mems_para.measure_flow;
+
+        if(fabs(err) < 0.5f)
+        {        
+            g_mem_para.mems_cal_coefficient = g_mem_para.mems_cal_coefficient * (1 + err);
+
+            mem_para_write();
+
+            ret = TRUE;
+        }
+        else
+        {
+            ret = FALSE;
+        }
+    }
+    else
+    {
+        ret = FALSE;
+    }
+
+    return (ret);
+}
+
 /*
 *********************************************************************************************************
 *                                             App_TaskMEMS()
@@ -177,15 +208,14 @@ void mems_read_instant_flow(void)
 */
 void  App_TaskMEMS (void *p_arg)
 {
-    INT8U err, FRH, FRM, FRL;
+    INT8U err;
     INT16U i;
+    INT32U FRH, FRM, FRL, average_times;
     
 
     (void)p_arg;
-    
-    while (DEF_TRUE) {
-        OSTimeDlyHMSM(0, 0, 0, 50);
         
+    while (DEF_TRUE) {        
         while(OSSemAccept(g_sem_mems));
         
         mems_read_instant_flow();
@@ -205,56 +235,37 @@ void  App_TaskMEMS (void *p_arg)
                     FRM = mems_frame_recv.data[1];
                     FRL = mems_frame_recv.data[2];
 
-                    g_mems_para.instant_flow = (INT32U)FRH * 65536 + (INT32U)FRM * 256 + (INT32U)FRL;
+                    g_mems_para.instant_flow = FRH * 65536 + FRM * 256 + FRL;
 
                     g_mems_para.buf[g_mems_para.index++] = g_mems_para.instant_flow;
 
-                    if(MAX_FLOW_NUM == g_mems_para.index)
+                    average_times = (g_mem_para.mems_average_times > 0) ? (g_mem_para.mems_average_times % MAX_FLOW_NUM) : (MEMS_AVERAGE_TIMES_DEFAULT);
+
+                    if(average_times == g_mems_para.index)
                     {
                         g_mems_para.index = 0;
                         
                         g_mems_para.sum = 0;
 
-                        for(i = 0; i < MAX_FLOW_NUM; i++)
+                        for(i = 0; i < average_times; i++)
                         {
                             g_mems_para.sum += g_mems_para.buf[i];
                         }
 
-                        g_mems_para.average_flow = g_mems_para.sum / MAX_FLOW_NUM;
+                        g_mems_para.average_flow = g_mems_para.sum / average_times;
 
-                        g_mems_para.cal_flow = g_mems_para.average_flow; //流量校准
-                        
-                        if((0 != g_mems_para.cal_flow) && (abs((int)g_mems_para.cal_flow - (int)g_mems_para.target_flow) < g_mem_para.mems_debounce_threshold))
+                        if(fabs(g_mem_para.mems_cal_coefficient) > 0.000001f)
                         {
-                            g_mems_para.inside_count++;
-
-                            if(g_mems_para.inside_count >= 2)
-                            {
-                                g_mems_para.inside_count = 0;
-                                g_mems_para.outside_count = 1;
-
-                                g_mems_para.disp_flow = g_mems_para.target_flow;
-                                g_mems_para.disp_flow_int_part = g_mems_para.disp_flow / 1000;
-                                g_mems_para.disp_flow_dec_part = (g_mems_para.disp_flow - (g_mems_para.disp_flow_int_part * 1000)) / 100;                                    
-                            }
-
-                            break;
-                        }       
-                        else
-                        {
-                            g_mems_para.inside_count = 0;
-                        }
-
-                        if(g_mems_para.outside_count)
-                        {
-                            g_mems_para.outside_count--;
+                            g_mems_para.measure_flow = (INT32U)(g_mems_para.average_flow * g_mem_para.mems_cal_coefficient); //流量校准
                         }
                         else
                         {
-                            g_mems_para.disp_flow = g_mems_para.cal_flow + 50;
-                            g_mems_para.disp_flow_int_part = g_mems_para.disp_flow / 1000;
-                            g_mems_para.disp_flow_dec_part = (g_mems_para.disp_flow - (g_mems_para.disp_flow_int_part * 1000)) / 100;
+                            g_mems_para.measure_flow = (INT32U)g_mems_para.average_flow;
                         }
+
+                        g_mems_para.disp_flow = g_mems_para.measure_flow + 50;
+                        g_mems_para.disp_flow_int_part = g_mems_para.disp_flow / 1000;
+                        g_mems_para.disp_flow_dec_part = (g_mems_para.disp_flow - (g_mems_para.disp_flow_int_part * 1000)) / 100;
                     }
                     break;
 

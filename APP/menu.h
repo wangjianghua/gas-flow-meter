@@ -27,7 +27,6 @@ typedef enum
 typedef enum 
 {
     MENU_SET_ALARM_TIME,
-    MENU_SET_TARGET_FLOW,
     MENU_SET_RTC_TIME,
     MENU_SET_MAX,
 } MENU_SET;
@@ -40,15 +39,6 @@ typedef enum
     ALARM_TIME_SET_QUIT,
     ALARM_TIME_SET_MAX,
 } ALARM_TIME_SET;
-
-typedef enum 
-{
-    TARGET_FLOW_SET_INT_PART,
-    TARGET_FLOW_SET_DEC_PART,
-    TARGET_FLOW_SET_CONFIRM,
-    TARGET_FLOW_SET_QUIT,
-    TARGET_FLOW_SET_MAX,
-} TARGET_FLOW_SET;
 
 typedef enum 
 {

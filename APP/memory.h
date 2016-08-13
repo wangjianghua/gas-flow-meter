@@ -6,7 +6,7 @@
 #endif
 
 
-#define MEM_PARA_DATE                   0x20150926
+#define MEM_PARA_DATE                   0x20160815
 
 #define MEM_PARA_TAG                    0x19890924
 #define MEM_PARA_CRC                    0x00000000
@@ -31,12 +31,10 @@ typedef struct
     unsigned int crc; //校验和
     unsigned int date; //日期
 
-    unsigned int mems_debounce_threshold;
+    unsigned int mems_average_times;
+    float mems_cal_coefficient;
 
-    unsigned int mems_cal_state;
-    unsigned int mems_cal[MAX_MEMS_CAL_GRPS][MAX_MEMS_CAL_ELEMS];
-
-    unsigned int para_reserve[MAX_PARA_NUM - 15];
+    unsigned int para_reserve[MAX_PARA_NUM - 5];
 } MEM_PARA, *P_MEM_PARA;
 
 extern MEM_PARA g_mem_para;
