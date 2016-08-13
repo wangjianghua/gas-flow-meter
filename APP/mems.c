@@ -174,9 +174,7 @@ BOOLEAN mems_flow_cal(INT32U standard_flow)
         {        
             g_mem_para.mems_cal_coefficient = g_mem_para.mems_cal_coefficient * (1 + err);
 
-            mem_para_write();
-
-            ret = TRUE;
+            ret = mem_para_write();
         }
         else
         {
@@ -239,7 +237,7 @@ void  App_TaskMEMS (void *p_arg)
 
                     g_mems_para.buf[g_mems_para.index++] = g_mems_para.instant_flow;
 
-                    average_times = (g_mem_para.mems_average_times > 0) ? (g_mem_para.mems_average_times % MAX_FLOW_NUM) : (MEMS_AVERAGE_TIMES_DEFAULT);
+                    average_times = (g_mem_para.mems_average_times > 0) ? (g_mem_para.mems_average_times % MAX_MEMS_FLOW_NUM) : (MEMS_AVERAGE_TIMES_DEFAULT);
 
                     if(average_times == g_mems_para.index)
                     {

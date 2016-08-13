@@ -21,6 +21,26 @@ void assert_failed(uint8_t* file, uint32_t line)
 }
 #endif
 
+#ifdef __GNUC__
+ /* With GCC/RAISONANCE, small printf (option LD Linker->Libraries->Small printf
+    set to 'Yes') calls __io_putchar() */
+ #define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+#else
+ #define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+#endif /* __GNUC__ */
+
+PUTCHAR_PROTOTYPE
+{
+    /* Place your implementation of fputc here */
+    /* e.g. write a character to the USART */
+    USART_SendData(PC_UART, (uint16_t)ch);
+
+    /* Loop until the end of transmission */
+    while(RESET == USART_GetFlagStatus(PC_UART, USART_FLAG_TC));
+
+    return(ch);
+}
+
 void STM32_SoftReset(void)
 {
     __set_FAULTMASK(SET);

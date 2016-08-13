@@ -68,9 +68,9 @@ INT16U PC_postProcess(PVOID handle)
 void  App_TaskPC (void *p_arg)
 {
     const INT8U addr[6] = {0x99, 0x99, 0x99, 0x99, 0x99, 0x99};
-    INT8U err, new_time[MAX_RTC_TIME_ITEM], buf[128];
+    INT8U err, len, new_time[MAX_RTC_TIME_ITEM], buf[128];
     INT16U send_len;
-    INT32U data_item;
+    INT32U data_item, standard_flow;
     
 
     (void)p_arg;
@@ -142,10 +142,12 @@ void  App_TaskPC (void *p_arg)
                     case PC_READ_VERSION_CMD:
                         memcpy(&buf[0], HARDWARE_VERSION, VERSION_LEN);
                         memcpy(&buf[VERSION_LEN], SOFTWARE_VERSION, VERSION_LEN);
+
+                        len = 2 * VERSION_LEN;
                         
-                        memcpy(&pc_frame_send.Data[DL645_07_DATA_ITEM_LEN], buf, 2 * VERSION_LEN);
+                        memcpy(&pc_frame_send.Data[DL645_07_DATA_ITEM_LEN], buf, len);
                         
-                        pc_frame_send.Len = DL645_07_DATA_ITEM_LEN + 2 * VERSION_LEN;
+                        pc_frame_send.Len = DL645_07_DATA_ITEM_LEN + len;
                         
                         pc_frame_send.Ctrl = 0x91;
                         
@@ -168,6 +170,78 @@ void  App_TaskPC (void *p_arg)
                         while(OSSemAccept(g_sem_pc));
                         
                         pc_uart_send((INT8U *)&pc_frame_send, send_len);
+                        break;
+
+                    case PC_READ_MEMS_PARA_CMD:
+                        memcpy(&buf[0], &g_mems_para.measure_flow, sizeof(g_mems_para.measure_flow));
+                        memcpy(&buf[SINGLE_PARA_SIZE], &g_mem_para.mems_average_times, sizeof(g_mem_para.mems_average_times));
+                        memcpy(&buf[2 * SINGLE_PARA_SIZE], &g_mem_para.mems_cal_coefficient, sizeof(g_mem_para.mems_cal_coefficient));
+
+                        len = sizeof(g_mems_para.measure_flow) + sizeof(g_mem_para.mems_average_times) + sizeof(g_mem_para.mems_cal_coefficient);
+                        
+                        memcpy(&pc_frame_send.Data[DL645_07_DATA_ITEM_LEN], buf, len);
+                        
+                        pc_frame_send.Len = DL645_07_DATA_ITEM_LEN + len;
+                        
+                        pc_frame_send.Ctrl = 0x91;
+                        
+                        send_len = Create_DL645_Frame((INT8U *)addr, pc_frame_send.Ctrl, pc_frame_send.Len, &pc_frame_send);
+                                                
+                        while(OSSemAccept(g_sem_pc));
+                        
+                        pc_uart_send((INT8U *)&pc_frame_send, send_len); 
+                        break;
+
+                    case PC_WRITE_MEMS_AVERAGE_TIMES_CMD:
+                        memcpy(&g_mem_para.mems_average_times, &pc_frame_recv.Data[12], SINGLE_PARA_SIZE);
+
+                        if(g_mem_para.mems_average_times <= MAX_MEMS_FLOW_NUM)
+                        {
+                            if(TRUE == mem_para_write())
+                            {
+                                pc_frame_send.Len = 0;
+                                
+                                pc_frame_send.Ctrl = 0x94;
+                                
+                                send_len = Create_DL645_Frame((INT8U *)addr, pc_frame_send.Ctrl, pc_frame_send.Len, &pc_frame_send);
+                                                        
+                                while(OSSemAccept(g_sem_pc));
+                                
+                                pc_uart_send((INT8U *)&pc_frame_send, send_len);
+                            }
+                            else
+                            {
+                                mem_para_read();
+                            }
+                        }
+                        else
+                        {
+                            mem_para_read();
+                        }
+                        break;
+
+                    case PC_WRITE_MEMS_CAL_COEFFICIENT_CMD:
+                        memcpy(&standard_flow, &pc_frame_recv.Data[12], SINGLE_PARA_SIZE);
+
+                        if(standard_flow <= ((MAX_MEMS_FLOW + 5) * MEMS_FLOW_GAIN))
+                        {
+                            if(TRUE == mems_flow_cal(standard_flow))
+                            {
+                                pc_frame_send.Len = 0;
+                                
+                                pc_frame_send.Ctrl = 0x94;
+                                
+                                send_len = Create_DL645_Frame((INT8U *)addr, pc_frame_send.Ctrl, pc_frame_send.Len, &pc_frame_send);
+                                                        
+                                while(OSSemAccept(g_sem_pc));
+                                
+                                pc_uart_send((INT8U *)&pc_frame_send, send_len);
+                            }
+                            else
+                            {
+                                mem_para_read();
+                            }
+                        }
                         break;
                         
                     default:

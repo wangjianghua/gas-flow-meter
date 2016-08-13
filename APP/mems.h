@@ -8,9 +8,11 @@
 
 #define MAX_MEMS_FLOW                          50u
 
+#define MEMS_FLOW_GAIN                       1000u
+
 #define MEMS_READ_INSTANT_FLOW_CMD            0xF0
 
-#define MAX_FLOW_NUM                           50u
+#define MAX_MEMS_FLOW_NUM                      50u
 
 #define MEMS_AVERAGE_TIMES_DEFAULT              1u
 #define MEMS_CAL_COEFFICIENT_DEFAULT            1u
@@ -41,7 +43,7 @@ typedef struct
 {    
     INT32U instant_flow;
 
-    INT32U buf[MAX_FLOW_NUM];
+    INT32U buf[MAX_MEMS_FLOW_NUM];
     INT16U index;
 
     INT32U sum;
