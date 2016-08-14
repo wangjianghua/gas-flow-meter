@@ -174,10 +174,10 @@ void  App_TaskPC (void *p_arg)
 
                     case PC_READ_MEMS_PARA_CMD:
                         memcpy(&buf[0], &g_mems_para.measure_flow, sizeof(g_mems_para.measure_flow));
-                        memcpy(&buf[SINGLE_PARA_SIZE], &g_mem_para.mems_average_times, sizeof(g_mem_para.mems_average_times));
+                        memcpy(&buf[SINGLE_PARA_SIZE], &g_mem_para.mems_sample_num, sizeof(g_mem_para.mems_sample_num));
                         memcpy(&buf[2 * SINGLE_PARA_SIZE], &g_mem_para.mems_cal_coefficient, sizeof(g_mem_para.mems_cal_coefficient));
 
-                        len = sizeof(g_mems_para.measure_flow) + sizeof(g_mem_para.mems_average_times) + sizeof(g_mem_para.mems_cal_coefficient);
+                        len = sizeof(g_mems_para.measure_flow) + sizeof(g_mem_para.mems_sample_num) + sizeof(g_mem_para.mems_cal_coefficient);
                         
                         memcpy(&pc_frame_send.Data[DL645_07_DATA_ITEM_LEN], buf, len);
                         
@@ -192,10 +192,10 @@ void  App_TaskPC (void *p_arg)
                         pc_uart_send((INT8U *)&pc_frame_send, send_len); 
                         break;
 
-                    case PC_WRITE_MEMS_AVERAGE_TIMES_CMD:
-                        memcpy(&g_mem_para.mems_average_times, &pc_frame_recv.Data[12], SINGLE_PARA_SIZE);
+                    case PC_WRITE_MEMS_SAMPLE_NUM_CMD:
+                        memcpy(&g_mem_para.mems_sample_num, &pc_frame_recv.Data[12], sizeof(g_mem_para.mems_sample_num));
 
-                        if(g_mem_para.mems_average_times <= MAX_MEMS_FLOW_NUM)
+                        if(0 != g_mem_para.mems_sample_num)
                         {
                             if(TRUE == mem_para_write())
                             {
@@ -221,7 +221,7 @@ void  App_TaskPC (void *p_arg)
                         break;
 
                     case PC_WRITE_MEMS_CAL_COEFFICIENT_CMD:
-                        memcpy(&standard_flow, &pc_frame_recv.Data[12], SINGLE_PARA_SIZE);
+                        memcpy(&standard_flow, &pc_frame_recv.Data[12], sizeof(standard_flow));
 
                         if(standard_flow <= ((MAX_MEMS_FLOW + 5) * MEMS_FLOW_GAIN))
                         {

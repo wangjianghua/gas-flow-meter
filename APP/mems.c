@@ -207,8 +207,7 @@ BOOLEAN mems_flow_cal(INT32U standard_flow)
 void  App_TaskMEMS (void *p_arg)
 {
     INT8U err;
-    INT16U i;
-    INT32U FRH, FRM, FRL, average_times;
+    INT32U FRH, FRM, FRL;
     
 
     (void)p_arg;
@@ -235,23 +234,16 @@ void  App_TaskMEMS (void *p_arg)
 
                     g_mems_para.instant_flow = FRH * 65536 + FRM * 256 + FRL;
 
-                    g_mems_para.buf[g_mems_para.index++] = g_mems_para.instant_flow;
+                    g_mems_para.sum += g_mems_para.instant_flow;
+                    g_mems_para.sample_num++;
 
-                    average_times = (g_mem_para.mems_average_times > 0) ? (g_mem_para.mems_average_times % MAX_MEMS_FLOW_NUM) : (MEMS_AVERAGE_TIMES_DEFAULT);
-
-                    if(average_times == g_mems_para.index)
+                    if(g_mems_para.sample_num >= g_mem_para.mems_sample_num)
                     {
-                        g_mems_para.index = 0;
-                        
+                        g_mems_para.average_flow = g_mems_para.sum / g_mems_para.sample_num;
+
                         g_mems_para.sum = 0;
-
-                        for(i = 0; i < average_times; i++)
-                        {
-                            g_mems_para.sum += g_mems_para.buf[i];
-                        }
-
-                        g_mems_para.average_flow = g_mems_para.sum / average_times;
-
+                        g_mems_para.sample_num = 0;
+                        
                         if(fabs(g_mem_para.mems_cal_coefficient) > 0.000001f)
                         {
                             g_mems_para.measure_flow = (INT32U)(g_mems_para.average_flow * g_mem_para.mems_cal_coefficient); //流量校准

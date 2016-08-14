@@ -12,9 +12,7 @@
 
 #define MEMS_READ_INSTANT_FLOW_CMD            0xF0
 
-#define MAX_MEMS_FLOW_NUM                      50u
-
-#define MEMS_AVERAGE_TIMES_DEFAULT              1u
+#define MEMS_SAMPLE_NUM_DEFAULT                 1u
 #define MEMS_CAL_COEFFICIENT_DEFAULT            1u
 
 #define MEMS_FRAME_MAX_DATA_LEN               257u
@@ -43,18 +41,16 @@ typedef struct
 {    
     INT32U instant_flow;
 
-    INT32U buf[MAX_MEMS_FLOW_NUM];
-    INT16U index;
-
     INT32U sum;
+    INT32U sample_num;
 
     FP32 average_flow;
 
     INT32U measure_flow;
         
     INT32U disp_flow;
-    INT16U disp_flow_int_part;
-    INT16U disp_flow_dec_part;
+    INT32U disp_flow_int_part;
+    INT32U disp_flow_dec_part;
 } MEMS_PARA, *P_MEMS_PARA;
 
 extern OS_EVENT *g_sem_mems;
