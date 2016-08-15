@@ -202,22 +202,34 @@ void  App_TaskPC (void *p_arg)
                                 pc_frame_send.Len = 0;
                                 
                                 pc_frame_send.Ctrl = 0x94;
-                                
-                                send_len = Create_DL645_Frame((INT8U *)addr, pc_frame_send.Ctrl, pc_frame_send.Len, &pc_frame_send);
-                                                        
-                                while(OSSemAccept(g_sem_pc));
-                                
-                                pc_uart_send((INT8U *)&pc_frame_send, send_len);
                             }
                             else
                             {
                                 mem_para_read();
+
+                                pc_frame_send.Data[0] = PC_ERR_PARA_SAVE_FAIL;
+                                    
+                                pc_frame_send.Len = 1;
+                                
+                                pc_frame_send.Ctrl = 0xD4;
                             }
                         }
                         else
                         {
                             mem_para_read();
+
+                            pc_frame_send.Data[0] = PC_ERR_INVALID_PARA;
+                                
+                            pc_frame_send.Len = 1;
+                            
+                            pc_frame_send.Ctrl = 0xD4;
                         }
+
+                        send_len = Create_DL645_Frame((INT8U *)addr, pc_frame_send.Ctrl, pc_frame_send.Len, &pc_frame_send);
+                                                
+                        while(OSSemAccept(g_sem_pc));
+                        
+                        pc_uart_send((INT8U *)&pc_frame_send, send_len);
                         break;
 
                     case PC_WRITE_MEMS_CAL_COEFFICIENT_CMD:
@@ -230,18 +242,32 @@ void  App_TaskPC (void *p_arg)
                                 pc_frame_send.Len = 0;
                                 
                                 pc_frame_send.Ctrl = 0x94;
-                                
-                                send_len = Create_DL645_Frame((INT8U *)addr, pc_frame_send.Ctrl, pc_frame_send.Len, &pc_frame_send);
-                                                        
-                                while(OSSemAccept(g_sem_pc));
-                                
-                                pc_uart_send((INT8U *)&pc_frame_send, send_len);
                             }
                             else
                             {
                                 mem_para_read();
+
+                                pc_frame_send.Data[0] = PC_ERR_PARA_SAVE_FAIL;
+                                    
+                                pc_frame_send.Len = 1;
+                                
+                                pc_frame_send.Ctrl = 0xD4;
                             }
                         }
+                        else
+                        {
+                            pc_frame_send.Data[0] = PC_ERR_INVALID_PARA;
+                                
+                            pc_frame_send.Len = 1;
+                            
+                            pc_frame_send.Ctrl = 0xD4;
+                        }
+
+                        send_len = Create_DL645_Frame((INT8U *)addr, pc_frame_send.Ctrl, pc_frame_send.Len, &pc_frame_send);
+                                                
+                        while(OSSemAccept(g_sem_pc));
+                        
+                        pc_uart_send((INT8U *)&pc_frame_send, send_len);
                         break;
                         
                     default:

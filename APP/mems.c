@@ -168,7 +168,7 @@ BOOLEAN mems_flow_cal(INT32U standard_flow)
 
     if(0 != g_mems_para.measure_flow)
     {
-        err = (standard_flow - g_mems_para.measure_flow) / g_mems_para.measure_flow;
+        err = ((FP32)standard_flow - (FP32)g_mems_para.measure_flow) / (FP32)g_mems_para.measure_flow;
 
         if(fabs(err) < 0.5f)
         {        
@@ -239,7 +239,7 @@ void  App_TaskMEMS (void *p_arg)
 
                     if(g_mems_para.sample_num >= g_mem_para.mems_sample_num)
                     {
-                        g_mems_para.average_flow = g_mems_para.sum / g_mems_para.sample_num;
+                        g_mems_para.average_flow = (FP32)g_mems_para.sum / (FP32)g_mems_para.sample_num;
 
                         g_mems_para.sum = 0;
                         g_mems_para.sample_num = 0;

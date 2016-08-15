@@ -15,6 +15,10 @@
 #define PC_WRITE_MEMS_SAMPLE_NUM_CMD            0xFF000007
 #define PC_WRITE_MEMS_CAL_COEFFICIENT_CMD       0xFF000008
 
+#define PC_ERR_NONE                             0x00
+#define PC_ERR_INVALID_PARA                     0x01
+#define PC_ERR_PARA_SAVE_FAIL                   0x02
+
 INT16U PC_postProcess(PVOID handle);
 void App_TaskPC(void *p_arg);
 
